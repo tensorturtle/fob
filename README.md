@@ -4,9 +4,7 @@
 
 ## Getting Started
 
-Install `uv`:
-```
-```
+[Install `uv`](https://docs.astral.sh/uv/getting-started/installation/)
 
 Clone this repository:
 ```
