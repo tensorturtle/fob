@@ -15,7 +15,6 @@ def init(args: Namespace) -> None:
         print(f"\N{white heavy check mark} Created new database at [magenta]{database_path}[/magenta]")
         print(f"\N{white heavy check mark} Applied database schema.")
 
-
 def apply_schema(db_path: Path) -> None:
     con = sqlite3.connect(db_path)
     cur = con.cursor()
@@ -34,5 +33,5 @@ def default_db_path() -> Path:
             base_path = Path(os.getenv('XDG_DATA_HOME', Path.home() / '.local' / 'share'))
         case _:
             raise OSError(f"Unsupported platform: {platform.system()}")
-    app_dir = base_path / "fob" / "app.db"
-    return app_dir
+    database_path = base_path / "fob" / "app.db"
+    return database_path

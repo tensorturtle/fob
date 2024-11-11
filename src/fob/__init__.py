@@ -32,6 +32,7 @@ def main():
     subparsers.add_parser('new_month', help='Allocate blocks for a new month')
     subparsers.add_parser('gm', help='Start a new day by selecting the blocks you will work on today')
     subparsers.add_parser('gn', help='Say good night')
+    subparsers.add_parser('uninstall', help='Uninstall fob')
 
     args = parser.parse_args()
 
