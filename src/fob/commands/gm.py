@@ -1,2 +1,4 @@
-def gm(command_args: list[str]) -> None:
-    print(f"Good morning! {command_args}")
+from argparse import Namespace
+
+def gm(args: Namespace) -> None:
+    print(f"Good morning! {args}")
