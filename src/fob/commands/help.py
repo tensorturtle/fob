@@ -1,8 +1,9 @@
 from rich import print
 from argparse import Namespace
 
+
 def help(args: Namespace | None) -> None:
-    print('''
+    print("""
 [green bold]Usage:[/green bold] [cyan bold]fob[/cyan bold] [OPTIONS] COMMAND
 
 A personal month-level daily block scheduler.
@@ -17,4 +18,4 @@ A personal month-level daily block scheduler.
 
 [green bold]Global Options:[/green bold]
     [cyan bold]-d, --database[/cyan bold] [magenta not bold]<PATH_TO_DB_FILE>[/magenta not bold]  Path to database file.
-''')
+""")
