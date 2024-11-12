@@ -11,7 +11,10 @@ def init(args: Namespace) -> None:
     if not args.database:
         default_db_path().parent.mkdir(parents=True, exist_ok=True)
     database_path = Path(args.database or default_db_path())
-    if not database_path.exists():
+    if database_path.exists():
+        print(f"Using existing database at [magenta]{database_path}[/magenta]")
+        print("Nothing to do for initialization. Run [bold green]fob help[/bold green] for next steps")
+    else:
         apply_schema(database_path)
         print(
             f"\N{WHITE HEAVY CHECK MARK} Created new database at [magenta]{database_path}[/magenta]"
