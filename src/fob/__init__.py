@@ -7,6 +7,13 @@ from rich import print
 import fob.commands
 
 def main():
+    try:
+        run_app()
+    except KeyboardInterrupt:
+        print("\n[red bold]Exiting.[/red bold]")
+        sys.exit(1)
+
+def run_app():
     if len(sys.argv) == 1:
         print("No command provided. See [green bold]fob help[/green bold] for usage information.")
         sys.exit(1)
@@ -47,6 +54,3 @@ def main():
         sys.exit(1)
 
     command_func(args)
-
-if __name__ == "__main__":
-    main()
