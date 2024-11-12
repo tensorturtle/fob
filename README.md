@@ -19,3 +19,36 @@ Run app for the first time:
 ```
 uv run fob init
 ```
+
+# Inner Workings
+
+## Database
+
+[`TinyDB`](https://github.com/msiemens/tinydb) is used to persist the data as a human-readable JSON file.
+
+Since we're not using a SQL database, we are responsible for upholding the integrity and consistency of the data before writing it to the database. We implement that by first receiving all the data from the user, validating it, and then 'commiting' (writing) to the database in one go.
+
+Example schema:
+```
+{
+  "2024-12": {
+    "work_days_allocated": 20,
+    "work_days_completed": 8,
+    "blocks_per_day": 5,
+    "areas": {
+      "First Area": {
+        allocated: 70,
+        completed: 10,
+      }
+      "Second Area": {
+        allocated: 30,
+        completed: 30,
+      }
+    }
+  }
+}
+```
+These constraints must be manually verified to be true within our database:
++ Total blocks (`work_days_allocated` * `blocks_per_day`) equals sum `allocated` field for each area.
++ `work_days_completed` equals sum of `completed` field for each area.
++ For each area, `completed` <= `allocated`

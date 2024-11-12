@@ -1,36 +1,59 @@
-from datetime import date
+from datetime import date, time
 from calendar import monthrange
+from argparse import Namespace
+from dataclasses import dataclass
 
 from rich.prompt import Prompt
 from rich import print
 from rich.table import Table
 from rich.console import Console
 
+from fob.db import DbIntegrityError
+from fob.db import TinyDBWrapper
 
-def new_month(command_args: list[str]) -> None:
+@dataclass
+class MonthBlockData:
+    year: int
+    month: int
+    work_days_allocated: int
+    blocks_per_day: int
+    blocks_per_area: dict[str, int]
+
+def write_new_month(data: MonthBlockData, db: TinyDBWrapper) -> None:
+    db.insert({
+        f"{data.year}-{data.month}": {
+            "work_days_allocated": data.work_days_allocated,
+            "work_days_completd": 0,
+            "blocks_per_day": data.blocks_per_day,
+            "blocks_per_area": data.blocks_per_area,
+        }
+    })
+
+def new_month(args: Namespace, db: TinyDBWrapper) -> None:
+    result = loop_until_user_happy()
+    if result is not None:
+        write_new_month(result, db)
+        print("\n[green]New month successfully created![/green]")
+
+
+def loop_until_user_happy() -> MonthBlockData | None:
     user_is_happy = False
     while not user_is_happy:
-        blocks_per_area = converse_with_user()
-
-        if not blocks_per_area:
-            print("[yellow]Starting over...[/yellow]\n")
-            continue
-
-        unallocated_existed, blocks_per_area = distribute_unallocated(blocks_per_area)
-
+        result = converse_with_user()
+        unallocated_existed, blocks_per_area = distribute_unallocated(result.blocks_per_area)
         display_blocks_table(blocks_per_area, None)
 
-        user_is_happy = (
+        if (
             Prompt.ask(
                 "\nAre you happy with the allocation?",
                 choices=["yes", "no"],
                 default="no" if unallocated_existed else "yes",
             )
             == "yes"
-        )
-        if not user_is_happy:
-            print("[yellow]Starting over...[/yellow]\n")
+        ):
+            return result
 
+        print("[yellow]Starting over...[/yellow]\n")
 
 def simplify_value_errors(func):
     def wrapper(*args, **kwargs):
@@ -45,7 +68,7 @@ def simplify_value_errors(func):
 
 
 @simplify_value_errors
-def converse_with_user() -> dict[str, int]:
+def converse_with_user() ->MonthBlockData:
     print("New month! Let's allocate blocks for the upcoming month.")
     print(
         "Press [cyan bold]enter[/cyan bold] to accept the [cyan bold](default value)[/cyan bold]."
@@ -72,10 +95,10 @@ def converse_with_user() -> dict[str, int]:
         )
     print(f"\nYou have chosen {working_days} working days.")
 
-    blocks = Prompt.ask("\n\tHow many blocks per day?", default="5")
-    total_blocks = int(working_days) * int(blocks)
+    blocks_per_day = Prompt.ask("\n\tHow many blocks per day?", default="5")
+    total_blocks = int(working_days) * int(blocks_per_day)
     print(
-        f"\nYou have chosen {blocks} blocks per day, for a total of {total_blocks} blocks."
+        f"\nYou have chosen {blocks_per_day} blocks per day, for a total of {total_blocks} blocks."
     )
 
     print("\nWhich areas will you be working on?")
@@ -125,8 +148,13 @@ def converse_with_user() -> dict[str, int]:
 
     display_blocks_table(blocks_per_area, None)
 
-    return blocks_per_area
-
+    return MonthBlockData(
+        year=int(year),
+        month=int(month),
+        work_days_allocated=int(working_days),
+        blocks_per_day=int(blocks_per_day),
+        blocks_per_area=blocks_per_area,
+    )
 
 def distribute_unallocated(blocks_per_area) -> tuple[bool, dict[str, int]]:
     """
@@ -169,8 +197,6 @@ def display_blocks_table(blocks: dict[str, int], highlight: str | None) -> None:
             for area in blocks.keys()
         ]
     )
-
-    # table.add_row(*[str(blocks[area]) for area in blocks.keys()])
 
     console = Console()
     console.print(table)
