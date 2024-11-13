@@ -1,2 +1,0 @@
-class DbIntegrityError(Exception):
-    pass

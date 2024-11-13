@@ -31,19 +31,19 @@ Since we're not using a SQL database, we are responsible for upholding the integ
 Example schema:
 ```
 {
-  "2024-12": {
-    "work_days_allocated": 20,
-    "work_days_completed": 8,
-    "blocks_per_day": 5,
-    "areas": {
-      "First Area": {
-        allocated: 70,
-        completed: 10,
-      }
-      "Second Area": {
-        allocated: 30,
-        completed: 30,
-      }
+  "year": 2024,
+  "month": 12,
+  "work_days_allocated": 20,
+  "work_days_completed": 8,
+  "blocks_per_day": 5,
+  "areas": {
+    "First Area": {
+      allocated: 70,
+      completed: 10,
+    }
+    "Second Area": {
+      allocated: 30,
+      completed: 30,
     }
   }
 }

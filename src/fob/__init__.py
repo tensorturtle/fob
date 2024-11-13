@@ -42,6 +42,9 @@ Try [cyan bold]fob help[/cyan bold] for usage information.
     parser.add_argument(
         "-d", "--database", type=str, help="Optional custom path to database file."
     )
+    parser.add_argument(
+        "-x", "--debug", action="store_true", help="Enable debug mode."
+    )
     subparsers = parser.add_subparsers(dest="command", help="Common Commands")
     subparsers.add_parser("help", help="Show help information and quit")
     subparsers.add_parser("new_month", help="Allocate blocks for a new month")
@@ -50,6 +53,7 @@ Try [cyan bold]fob help[/cyan bold] for usage information.
     )
     subparsers.add_parser("gn", help="Say good night")
     subparsers.add_parser("reset", help="Reset fob by deleting persistent database file.")
+    subparsers.add_parser("sup", help="Quick look at the month and today's blocks")
 
     args = parser.parse_args()
 
@@ -68,7 +72,8 @@ Try [cyan bold]fob help[/cyan bold] for usage information.
 
     db_path = Path(args.database or default_db_path())
     if check_db_exists(args):
-        print(f"Using [bold]existing[/bold] database at [not bold][magenta]{db_path}[/not bold][/magenta]")
+        if args.debug:
+            print(f"Using [bold]existing[/bold] database at [not bold][magenta]{db_path}[/not bold][/magenta]")
     else:
         print(
             f"\N{WHITE HEAVY CHECK MARK} [bold]Created[/bold] new database at [not bold][magenta]{db_path}[/not bold][/magenta]"

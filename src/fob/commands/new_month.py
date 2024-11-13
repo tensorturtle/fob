@@ -8,38 +8,39 @@ from rich import print
 from rich.table import Table
 from rich.console import Console
 
-from fob.db import DbIntegrityError
 from fob.db import TinyDBWrapper
-
-@dataclass
-class MonthBlockData:
-    year: int
-    month: int
-    work_days_allocated: int
-    blocks_per_day: int
-    blocks_per_area: dict[str, int]
-
-def write_new_month(data: MonthBlockData, db: TinyDBWrapper) -> None:
-    db.insert({
-        f"{data.year}-{data.month}": {
-            "work_days_allocated": data.work_days_allocated,
-            "work_days_completd": 0,
-            "blocks_per_day": data.blocks_per_day,
-            "blocks_per_area": data.blocks_per_area,
-        }
-    })
+from fob.db import MonthBlockData
 
 def new_month(args: Namespace, db: TinyDBWrapper) -> None:
-    result = loop_until_user_happy()
+    result = loop_until_user_happy(args)
     if result is not None:
         write_new_month(result, db)
         print("\n[green]New month successfully created![/green]")
+        print("Next steps:")
+        print("\t[green bold]fob gm[/green bold]: Start your day with the good morning command.")
 
+def write_new_month(data: MonthBlockData, db: TinyDBWrapper) -> None:
+    areas = {}
+    for area, blocks in data.blocks_per_area.items():
+        areas[area] = {
+            "allocated": blocks,
+            "completed": 0,
+        }
 
-def loop_until_user_happy() -> MonthBlockData | None:
+    #!TODO - Add a check to see if the year-month already exists
+    db.insert({
+        "year": data.year,
+        "month": data.month,
+        "work_days_allocated": data.work_days_allocated,
+        "work_days_completed": 0,
+        "blocks_per_day": data.blocks_per_day,
+        "areas": areas,
+    })
+
+def loop_until_user_happy(args: Namespace) -> MonthBlockData | None:
     user_is_happy = False
     while not user_is_happy:
-        result = converse_with_user()
+        result = converse_with_user(args)
         unallocated_existed, blocks_per_area = distribute_unallocated(result.blocks_per_area)
         display_blocks_table(blocks_per_area, None)
 
@@ -68,7 +69,7 @@ def simplify_value_errors(func):
 
 
 @simplify_value_errors
-def converse_with_user() ->MonthBlockData:
+def converse_with_user(args: Namespace) ->MonthBlockData:
     print("New month! Let's allocate blocks for the upcoming month.")
     print(
         "Press [cyan bold]enter[/cyan bold] to accept the [cyan bold](default value)[/cyan bold]."
@@ -84,7 +85,9 @@ def converse_with_user() ->MonthBlockData:
     month = Prompt.ask("\tWhat month?", default=str(today.month))
 
     days_in_month = monthrange(int(year), int(month))[1]
-    print(f"\nAllocating blocks for {year}/{month}, which has {days_in_month} days.")
+
+    if args.debug:
+        print(f"\nAllocating blocks for {year}/{month}, which has {days_in_month} days.")
 
     working_days = Prompt.ask(
         "\n\tHow many working days?", default=str(days_in_month - 8)
@@ -93,7 +96,9 @@ def converse_with_user() ->MonthBlockData:
         print(
             "[red bold]Error:[/red bold] Invalid number of working days. Please try again."
         )
-    print(f"\nYou have chosen {working_days} working days.")
+
+    if args.debug:
+        print(f"\nYou have chosen {working_days} working days.")
 
     blocks_per_day = Prompt.ask("\n\tHow many blocks per day?", default="5")
     total_blocks = int(working_days) * int(blocks_per_day)
@@ -110,7 +115,8 @@ def converse_with_user() ->MonthBlockData:
             break
         areas.append(area)
 
-    print(f"\nYou have chosen the following areas: {', '.join(areas)}")
+    if args.debug:
+        print(f"\nYou have chosen the following areas: {', '.join(areas)}")
 
     blocks_per_area = {}
     for area in areas:
@@ -128,7 +134,8 @@ def converse_with_user() ->MonthBlockData:
             # Don't count buffer
             break
         remaining_blocks = total_blocks - sum(blocks_per_area.values())
-        print(f"\nYou have {remaining_blocks} blocks remaining.")
+        if args.debug:
+            print(f"\nYou have {remaining_blocks} blocks remaining.")
         display_blocks_table(blocks_per_area, area)
         equal_split_from_remaining = remaining_blocks // (len(areas) - i - 1)
         blocks_for_area = int(
@@ -193,7 +200,7 @@ def display_blocks_table(blocks: dict[str, int], highlight: str | None) -> None:
     # highlight the focus area
     table.add_row(
         *[
-            str(blocks[area]) if area != highlight else f"[bold]{blocks[area]}[/bold]"
+            str(blocks[area]) if area != highlight else f"[reverse]{blocks[area]}[/reverse]"
             for area in blocks.keys()
         ]
     )
