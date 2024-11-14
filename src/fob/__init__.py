@@ -10,6 +10,7 @@ import fob.commands
 from fob.utils import default_db_path, check_db_exists
 from fob.db import TinyDBWrapper
 
+
 def main():
     try:
         run_app()
@@ -81,3 +82,6 @@ Try [cyan bold]fob help[/cyan bold] for usage information.
     db = TinyDBWrapper(db_path)
 
     command_func(args, db)
+
+if __name__ == "__main__":
+    main()

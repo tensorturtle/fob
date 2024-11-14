@@ -1,7 +1,7 @@
 [project]
 name = "fob"
 version = "0.1.0"
-description = "Add your description here"
+description = "Focus Blocks: Simple and elegant daily time management tool."
 readme = "README.md"
 authors = [
     { name = "tensorturtle", email = "tensorturtle@gmail.com" } 
@@ -15,6 +15,7 @@ dependencies = [
 [project.scripts]
 fob = "fob:main"
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+[tool.uv]
+dev-dependencies = [
+    "nuitka>=2.4.11",
+]

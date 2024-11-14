@@ -1,4 +1,9 @@
+# Mac
 .DS_Store
+
+# Nuitka
+__init__.dist/
+__init__.build/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
