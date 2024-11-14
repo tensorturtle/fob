@@ -52,7 +52,6 @@ Try [cyan bold]fob help[/cyan bold] for usage information.
     subparsers.add_parser(
         "gm", help="Start a new day by selecting the blocks you will work on today"
     )
-    subparsers.add_parser("gn", help="Say good night")
     subparsers.add_parser("reset", help="Reset fob by deleting persistent database file.")
     subparsers.add_parser("sup", help="Quick look at the month and today's blocks")
 

@@ -28,7 +28,7 @@ if [ "$OS" = "Darwin" ]; then
 
     # Clean up
     echo "Cleaning up..."
-    rm -r __init__.dist __init__.build __init__.onefile-build
+    rm -r __init__.dist __init__.build __init__.onefile-build fob
 
     echo "Installation complete. The 'fob' command is now available. If not, please check that $DEST_PATH is in your PATH environment variable."
 else
