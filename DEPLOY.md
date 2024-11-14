@@ -17,9 +17,9 @@ Copy it to somewhere on your PATH.
 ```
 echo $PATH
 ```
-On mac, recommended is: `/Users/<MY_USERNAME>/.local/bin`, so for me:
+On mac, recommended is: `/Users/$USER/.local/bin`:
 ```
-cp __init__.dist/fob /Users/tensorturtle/.local/bin
+cp __init__.dist/fob /Users/$USER/.local/bin
 ```
 
 The `fob` executable is also uploaded to Github release page for each version release.
