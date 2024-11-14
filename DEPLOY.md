@@ -4,12 +4,11 @@
 
 To create a standalone executable:
 ```
-uv run python -m nuitka --standalone src/fob/__init__.py --output-filename=fob
+uv run python -m nuitka --standalone --onefile src/fob/__init__.py --output-filename=fob
 ```
 
-Run it:
+Try running the resulting binary:
 ```
-cd __init__.dist
 ./fob
 ```
 
@@ -19,7 +18,13 @@ echo $PATH
 ```
 On mac, recommended is: `/Users/$USER/.local/bin`:
 ```
-cp __init__.dist/fob /Users/$USER/.local/bin
+mkdir -p /Users/$USER/.local/bin
+cp fob /Users/$USER/.local/bin
+```
+
+Now, it can be run from anywhere on your system:
+```
+fob
 ```
 
 The `fob` executable is also uploaded to Github release page for each version release.
