@@ -5,7 +5,15 @@
 
 # `fob`: Focus Blocks
 
-## Getting Started
+## Quick Start
+
+Download the program from the latest [Github release](https://github.com/tensorturtle/fob/releases) and put it somewhere on PATH.
+
+A `curl | sh` type of installation script for the the lazy is coming soon.
+
+`fob` runs on Mac, Linux, and Windows. In practice, it's only tested on Mac and Linux.
+
+## Development
 
 [Install `uv`](https://docs.astral.sh/uv/getting-started/installation/)
 
@@ -15,10 +23,14 @@ git clone https://github.com/tensorturtle/fob.git
 cd fob
 ```
 
-Run app for the first time:
+Run app in development:
 ```
-uv run fob init
+uv run fob
 ```
+
+## Release
+
+From the root of this repository, run `dev_install.sh`. It uses nuitka to compile the python code into a single file executable, and then installs it to the system.
 
 # Inner Workings
 
@@ -28,27 +40,4 @@ uv run fob init
 
 Since we're not using a SQL database, we are responsible for upholding the integrity and consistency of the data before writing it to the database. We implement that by first receiving all the data from the user, validating it, and then 'commiting' (writing) to the database in one go.
 
-Example schema:
-```
-{
-  "year": 2024,
-  "month": 12,
-  "work_days_allocated": 20,
-  "work_days_completed": 8,
-  "blocks_per_day": 5,
-  "areas": {
-    "First Area": {
-      allocated: 70,
-      completed: 10,
-    }
-    "Second Area": {
-      allocated: 30,
-      completed: 30,
-    }
-  }
-}
-```
-These constraints must be manually verified to be true within our database:
-+ Total blocks (`work_days_allocated` * `blocks_per_day`) equals sum `allocated` field for each area.
-+ `work_days_completed` equals sum of `completed` field for each area.
-+ For each area, `completed` <= `allocated`
+Run the program with debug option `fob -x` or `fob --debug` to see how the database gets updated. Also, the so-called database is actually just a human-readable JSON file, so you can open that to inspect / edit it.

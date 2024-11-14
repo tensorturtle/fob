@@ -24,7 +24,12 @@ class RawQuantityColumn(ProgressColumn):
         return Text(completed_total, style="progress.data")
 
 def display_checklist(args: Namespace, db: TinyDBWrapper) -> None:
-    checklist = db.all()[0]['checklist']
+    try:
+        checklist = db.all()[0]['checklist']
+    except KeyError:
+        print("[red][bold]No day data found.[/red][/bold]")
+        print("Run [cyan][bold]fob gm[/cyan][/bold] to start a new day.")
+        return
     if args.debug:
         print("Checklist from DB:")
         pprint(checklist)
@@ -35,8 +40,12 @@ def display_checklist(args: Namespace, db: TinyDBWrapper) -> None:
 
 def day_checklist(args: Namespace, db: TinyDBWrapper) -> None:
     try:
-
-        checklist = db.all()[0]['checklist']
+        try:
+            checklist = db.all()[0]['checklist']
+        except IndexError:
+            print("[red][bold]No day data found.[/red][/bold]")
+            print("Run [cyan][bold]fob gm[/cyan][/bold] to start a new day.")
+            return
         if args.debug:
             print("Checklist from DB:")
             pprint(checklist)
@@ -55,8 +64,12 @@ def day_checklist(args: Namespace, db: TinyDBWrapper) -> None:
             print("\n[bold]Mark blocks as completed:[/bold]")
             check_number = Prompt.ask(f"Which blocks have you completed? (1-{len(checklist)}): ")
 
-            # mark the blocks as completed
-            checklist[check_number].update({"done": True})
+            try:
+                # mark the blocks as completed
+                checklist[check_number].update({"done": True})
+            except KeyError:
+                print("[red][bold]Invalid block number.[/red][/bold]")
+                return
 
             if args.debug:
                 print("Updated checklist:")
@@ -78,13 +91,22 @@ def day_checklist(args: Namespace, db: TinyDBWrapper) -> None:
                 print("Start a new day: [green bold]fob gm[/green bold]")
                 return
 
-    except KeyError: # No 'today' entry
+    except KeyError as e: # No 'today' entry
         print("[red][bold]No day data found.[/red][/bold]")
+        if args.debug:
+            print(f"KeyError: {e}")
+
 
 
 def month_overview(args: Namespace, db: TinyDBWrapper) -> None:
     today = date.today()
-    data = db.search(where('year') == today.year and where('month') == today.month)[0]
+    try:
+        data = db.search(where('year') == today.year and where('month') == today.month)[0]
+    except IndexError:
+        print("[red][bold]No month data found.[/red][/bold]")
+        print("Run [cyan][bold]fob new_month[/cyan][/bold] to start a new month.")
+
+        return
 
     console = Console()
 

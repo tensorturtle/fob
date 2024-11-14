@@ -11,5 +11,8 @@ class MonthBlockData:
     blocks_per_area: dict[str, int]
 
 
-def checklist_complete(db: TinyDBWrapper):
-    return all([info['done'] for info in db.all()[0]['checklist'].values()])
+def checklist_complete(db: TinyDBWrapper) -> bool:
+    try:
+        return all([info['done'] for info in db.all()[0]['checklist'].values()])
+    except KeyError: # 'checklist'
+        return False
