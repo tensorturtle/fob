@@ -11,6 +11,10 @@
 
 ## Introduction
 
+### Who is Focus Blocks for?
+
+Focus Blocks is highly self-motivated people. It is for people who find the idea of having a daily-level repetition too boring. 
+
 ### How to use Focus Blocks
 
 1. At the start of the month, decide the total number of blocks and the number of blocks you want to allocate to each area.
@@ -20,7 +24,8 @@
 
 ### Important Concepts
 
-+ **Block**: A period of focused work. (1.5 to 3 hours recommended). 
++ **Block**: A block is a 2-2.5 hour period of focused work. Aim to schedule 2 to 5 blocks per day depending on your circumstances.
++ **Area**: Somewhat specific areas that you want to work on during the month. Typically 4-7 areas including exercise.
 + **Buffer**: When assigning blocks at the beginning of the month, it is highly recommended to reserve Buffer blocks. Buffer blocks are meant to be used when, due to unforeseen circumstances, you failed to spend a given block as allocated.
 
 ### Tips for using Focus Blocks in your life
