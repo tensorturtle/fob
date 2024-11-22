@@ -1,3 +1,4 @@
+# This is the main entry point for the application.
 import sys
 import argparse
 from dataclasses import dataclass

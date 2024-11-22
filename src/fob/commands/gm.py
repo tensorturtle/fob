@@ -4,7 +4,8 @@ from calendar import monthrange
 
 from rich.pretty import pprint, Pretty
 from rich import print
-from rich.layout import Layout, Panel
+from rich.layout import Layout
+from rich.panel import Panel
 from rich.progress import Progress, TextColumn, BarColumn, TaskProgressColumn, ProgressColumn
 from rich.console import Console, Group
 from rich.rule import Rule
@@ -13,7 +14,8 @@ from rich.text import Text
 from tinydb import where, Query
 
 from fob.db import MonthBlockData, TinyDBWrapper, checklist_complete
-from fob.commands.components import month_overview, display_checklist
+from fob.commands.overviews import month_overview
+from fob.commands.user_flows import display_checklist
 
 class InvalidUserInput(Exception):
     '''
