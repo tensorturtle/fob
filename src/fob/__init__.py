@@ -55,7 +55,13 @@ Try [cyan bold]fob help[/cyan bold] for usage information.
     )
     subparsers.add_parser("reset", help="Reset fob by deleting persistent database file.")
     subparsers.add_parser("sup", help="Quick look at the month and today's blocks")
-
+    did_parser = subparsers.add_parser("did", help="Check off blocks from today's checklist")
+    did_parser.add_argument(
+        "block_id",
+        type=str,
+        help="ID of the block to check off (int)",
+    )
+    subparsers.add_parser("nvm", help="Revise block assignment for today and change a non-Buffer block into a Buffer block, and mark that new Buffer block as complete."
     args = parser.parse_args()
 
     command_func = None

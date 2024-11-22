@@ -3,6 +3,7 @@ from datetime import date
 from calendar import monthrange
 
 from tinydb import where
+from rich.pretty import pprint
 from rich.console import Console, Group
 from rich.panel import Panel
 from rich.progress import Progress, BarColumn, TaskProgressColumn, TextColumn, ProgressColumn

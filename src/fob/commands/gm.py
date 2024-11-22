@@ -14,8 +14,7 @@ from rich.text import Text
 from tinydb import where, Query
 
 from fob.db import MonthBlockData, TinyDBWrapper, checklist_complete
-from fob.commands.overviews import month_overview
-from fob.commands.user_flows import display_checklist
+from fob.commands.overviews import month_overview, display_checklist
 
 class InvalidUserInput(Exception):
     '''
@@ -52,7 +51,8 @@ def gm(args: Namespace, db: TinyDBWrapper) -> None:
     print("[bold]Today's Checklist:[/bold]")
     display_checklist(args, db)
 
-    print("Run [cyan][bold]fob sup[/cyan][/bold] to track daily progress and to see the month overview again.")
+    print("Next commands: [cyan][bold]fob sup[/cyan][/bold] to see the above overviews again.")
+    print("[green][bold]fob did (number) [/green][/bold] to mark a block as done.")
 
 
 def new_day(args: Namespace, db: TinyDBWrapper, data) -> None:

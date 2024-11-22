@@ -19,4 +19,5 @@ A personal month-level daily block scheduler.
 [green bold]Global Options:[/green bold]
     [cyan bold]-d, --database[/cyan bold] [magenta not bold]<PATH_TO_DB_FILE>[/magenta not bold]  Path to database file. You can use a cloud storage (eg. Dropbox) to sync the database across devices.
     [cyan bold]-x, --debug[/cyan bold]  Enable debug mode.
-""")
+
+First time with fob? Start by running [green][bold]fob new_month[/green][/bold] to allocate blocks for the month.""")

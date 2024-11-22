@@ -26,5 +26,4 @@ def reset(args: Namespace, db: TinyDBWrapper) -> None:
     except FileNotFoundError:
         pass
     print(f"\n\N{WHITE HEAVY CHECK MARK} [bold]Deleted[/bold] persistent database and directories at [not bold][magenta]{db_path}[/not bold][/magenta].")
-    print("\nNext steps:")
-    print("\t[green bold]fob new_month[/green bold]: Start a new month (creates a new database)")
+    print("\nNext: [green bold]fob new_month[/green bold]: Start a new month (creates a new database)")

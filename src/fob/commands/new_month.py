@@ -16,8 +16,7 @@ def new_month(args: Namespace, db: TinyDBWrapper) -> None:
     if result is not None:
         write_new_month(result, db)
         print("\n[green]New month successfully created![/green]")
-        print("Next steps:")
-        print("\t[green bold]fob gm[/green bold]: Start your day with the good morning command.")
+        print("Next commands: [green bold]fob gm[/green bold] - Start your day with the good morning command.")
 
 def write_new_month(data: MonthBlockData, db: TinyDBWrapper) -> None:
     areas = {}
@@ -81,8 +80,8 @@ def converse_with_user(args: Namespace) ->MonthBlockData:
         )
         today = today.replace(day=1)
         today = today.replace(month=today.month + 1)
-    year = Prompt.ask("\n\tWhat year?", default=str(today.year))
-    month = Prompt.ask("\tWhat month?", default=str(today.month))
+    year = Prompt.ask("\nWhat year?", default=str(today.year))
+    month = Prompt.ask("What month?", default=str(today.month))
 
     days_in_month = monthrange(int(year), int(month))[1]
 
@@ -90,7 +89,7 @@ def converse_with_user(args: Namespace) ->MonthBlockData:
         print(f"\nAllocating blocks for {year}/{month}, which has {days_in_month} days.")
 
     working_days = Prompt.ask(
-        "\n\tHow many working days?", default=str(days_in_month - 8)
+        "How many working days?", default=str(days_in_month - 8)
     )
     if int(working_days) > days_in_month or int(working_days) <= 0:
         print(
@@ -98,25 +97,26 @@ def converse_with_user(args: Namespace) ->MonthBlockData:
         )
 
     if args.debug:
-        print(f"\nYou have chosen {working_days} working days.")
+        print(f"You have chosen {working_days} working days.")
 
-    blocks_per_day = Prompt.ask("\n\tHow many blocks per day?", default="5")
+    blocks_per_day = Prompt.ask("How many blocks per day?", default="5")
     total_blocks = int(working_days) * int(blocks_per_day)
+    print("---")
     print(
-        f"\nYou have chosen {blocks_per_day} blocks per day, for a total of {total_blocks} blocks."
+        f"You have chosen {blocks_per_day} blocks per day, for a total of {total_blocks} blocks.\n"
     )
 
-    print("\nWhich areas will you be working on?")
+    print("Which areas will you be working on?")
     areas = []
 
     while True:
-        area = Prompt.ask("\tNew Focus Area (enter empty to finish)", default="")
+        area = Prompt.ask("New Focus Area (enter empty to finish)", default="")
         if area == "":
             break
         areas.append(area)
 
     if args.debug:
-        print(f"\nYou have chosen the following areas: {', '.join(areas)}")
+        print(f"You have chosen the following areas: {', '.join(areas)}")
 
     blocks_per_area = {}
     for area in areas:
@@ -125,7 +125,7 @@ def converse_with_user(args: Namespace) ->MonthBlockData:
     areas.append("Buffer")
     default_buffer = min(8, total_blocks)
     buffer_blocks = Prompt.ask(
-        "\n\tHow many blocks for Buffer?", default=str(default_buffer)
+        "How many blocks for Buffer?", default=str(default_buffer)
     )
     blocks_per_area.update({"Buffer": int(buffer_blocks)})
 
@@ -135,12 +135,12 @@ def converse_with_user(args: Namespace) ->MonthBlockData:
             break
         remaining_blocks = total_blocks - sum(blocks_per_area.values())
         if args.debug:
-            print(f"\nYou have {remaining_blocks} blocks remaining.")
+            print(f"You have {remaining_blocks} blocks remaining.")
         display_blocks_table(blocks_per_area, area)
         equal_split_from_remaining = remaining_blocks // (len(areas) - i - 1)
         blocks_for_area = int(
             Prompt.ask(
-                f"\tHow many blocks for {area}?",
+                f"How many blocks for {area}?",
                 default=str(equal_split_from_remaining),
             )
         )
