@@ -1,27 +1,11 @@
 from argparse import Namespace
-from datetime import date
-from calendar import monthrange
-
-from tinydb import where
-from rich.pretty import pprint, Pretty
-from rich.console import Console, Group
+from rich.pretty import pprint
 from rich.panel import Panel
-from rich.progress import Progress, BarColumn, TaskProgressColumn, TextColumn, ProgressColumn
-from rich.rule import Rule
-from rich.table import Table
-from rich.text import Text
 from rich import print
 from rich.prompt import Prompt
 
 from fob.db import TinyDBWrapper
 from fob.db import checklist_complete
-
-# Custom Column to display assigned / total values
-class RawQuantityColumn(ProgressColumn):
-    def render(self, task) -> Text:
-        # Format as 'completed / total'
-        completed_total = f"{task.completed:.0f} / {task.total:.0f}"
-        return Text(completed_total, style="progress.data")
 
 def display_checklist(args: Namespace, db: TinyDBWrapper) -> None:
     try:
@@ -37,7 +21,6 @@ def display_checklist(args: Namespace, db: TinyDBWrapper) -> None:
     for num, info in checklist.items():
         print(Panel(f"{num}: {info['name']}", border_style="bold green" if info['done'] else "bold red"))
 
-
 def day_checklist(args: Namespace, db: TinyDBWrapper) -> None:
     try:
         try:
@@ -51,8 +34,6 @@ def day_checklist(args: Namespace, db: TinyDBWrapper) -> None:
             pprint(checklist)
 
         print("[bold]\nToday's Checklist:[/bold]")
-        # create a new dict that creates an entry for each block
-
         display_checklist(args, db)
 
         if checklist_complete(db):
@@ -60,12 +41,10 @@ def day_checklist(args: Namespace, db: TinyDBWrapper) -> None:
             print("Start a new day: [green bold]fob gm[/green bold]")
             return
         else:
-            # get user input
             print("\n[bold]Mark blocks as completed:[/bold]")
             check_number = Prompt.ask(f"Which blocks have you completed? (1-{len(checklist)}): ")
 
             try:
-                # mark the blocks as completed
                 checklist[check_number].update({"done": True})
             except KeyError:
                 print("[red][bold]Invalid block number.[/red][/bold]")
@@ -75,14 +54,12 @@ def day_checklist(args: Namespace, db: TinyDBWrapper) -> None:
                 print("Updated checklist:")
                 pprint(checklist)
 
-            # update db
             db.update({"checklist": checklist}, None)
 
             if args.debug:
                 print("Updated database:")
                 pprint(db.all())
 
-            # updated checklist
             print("\n[green]Checklist updated![/green]\n")
             display_checklist(args, db)
 
@@ -91,55 +68,7 @@ def day_checklist(args: Namespace, db: TinyDBWrapper) -> None:
                 print("Start a new day: [green bold]fob gm[/green bold]")
                 return
 
-    except KeyError as e: # No 'today' entry
+    except KeyError as e:  # No 'today' entry
         print("[red][bold]No day data found.[/red][/bold]")
         if args.debug:
             print(f"KeyError: {e}")
-
-
-
-def month_overview(args: Namespace, db: TinyDBWrapper) -> None:
-    today = date.today()
-    try:
-        data = db.search(where('year') == today.year and where('month') == today.month)[0]
-    except IndexError:
-        print("[red][bold]No month data found.[/red][/bold]")
-        print("Run [cyan][bold]fob new_month[/cyan][/bold] to start a new month.")
-
-        return
-
-    console = Console()
-
-    m_progress = Progress(
-        TextColumn("[progress.description]{task.description}"),
-        BarColumn(),
-        TaskProgressColumn(),
-        RawQuantityColumn(),
-        disable=True
-    )
-
-    progress = Progress(
-        TextColumn("[progress.description]{task.description}"),
-        BarColumn(),
-        TaskProgressColumn(),
-        RawQuantityColumn(),
-        disable=True # don't print immediately, print when called by console
-    )
-
-    today = date.today()
-    days_in_month = monthrange(today.year, today.month)[1]
-
-    with m_progress:
-        task = m_progress.add_task(f"Month", total=days_in_month)
-        m_progress.update(task, completed=today.day)
-
-        task = m_progress.add_task(f"Work Days", total=data['work_days_allocated'])
-        m_progress.update(task, completed=data['work_days_completed'])
-
-    with progress:
-        for area_name, blocks in data['areas'].items():
-            task = progress.add_task(f"[bold]{area_name}[/bold]", total=blocks['allocated'])
-            progress.update(task, completed=blocks['completed'])
-
-    panel = Panel(Group(m_progress, Rule(style='cyan'), progress), title="This Month", border_style="bold cyan")
-    console.print(panel)
