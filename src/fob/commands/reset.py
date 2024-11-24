@@ -10,7 +10,7 @@ from fob.db import TinyDBWrapper
 
 
 def reset(args: Namespace, db: TinyDBWrapper) -> None:
-    print(f"[red bold]Warning![/red bold] This will delete the database at the default path.")
+    print("[red bold]Warning![/red bold] This will delete the database at the default path.")
     if Prompt.ask("Are you sure?", choices=["yes", "no"], default="no") == "no":
         print("Reset cancelled.")
         return

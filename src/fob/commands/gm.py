@@ -1,19 +1,13 @@
 from argparse import Namespace
 from datetime import date
-from calendar import monthrange
 
-from rich.pretty import pprint, Pretty
+from rich.pretty import Pretty
 from rich import print
-from rich.layout import Layout
 from rich.panel import Panel
-from rich.progress import Progress, TextColumn, BarColumn, TaskProgressColumn, ProgressColumn
-from rich.console import Console, Group
-from rich.rule import Rule
 from rich.prompt import Prompt
-from rich.text import Text
 from tinydb import where, Query
 
-from fob.db import MonthBlockData, TinyDBWrapper, checklist_complete
+from fob.db import TinyDBWrapper, checklist_complete
 from fob.commands.overviews import month_overview, display_checklist
 
 class InvalidUserInput(Exception):
@@ -36,7 +30,7 @@ def gm(args: Namespace, db: TinyDBWrapper) -> None:
         print("In the meantime, consider running [bold][cyan]fob reset[/cyan][/bold].")
         return
 
-    print(f"Good morning! \N{SUNRISE}")
+    print("Good morning! \N{SUNRISE}")
     month_overview(args, db)
     try:
         new_day(args, db, data[0]) # can raise InvalidUserInput
@@ -94,11 +88,11 @@ def new_day(args: Namespace, db: TinyDBWrapper, data) -> None:
         blocks_assigned = int(Prompt.ask(f"({blocks_per_day - blocks_remaining_to_assign + 1}/{blocks_per_day}) How many blocks for [bold]{area_name}[/bold]? (max: [bold][cyan]{max_blocks}[/bold][/cyan])", default=0))
 
         if blocks_assigned > blocks_remaining_to_assign:
-            print(f"[red][bold]Error![/red] You have assigned more blocks than you have available today. Please try again.")
+            print("[red][bold]Error![/red] You have assigned more blocks than you have available today. Please try again.")
             raise InvalidUserInput
 
         if blocks_assigned > blocks['allocated'] - blocks['completed']:
-            print(f"[red][bold]Error![/red][/bold] You have assigned more blocks than are remaining in this area. Please try again.")
+            print("[red][bold]Error![/red][/bold] You have assigned more blocks than are remaining in this area. Please try again.")
             raise InvalidUserInput
 
         blocks_remaining_to_assign -= blocks_assigned
@@ -110,7 +104,7 @@ def new_day(args: Namespace, db: TinyDBWrapper, data) -> None:
         today_areas[area_name] = blocks_assigned
 
     if blocks_remaining_to_assign > 0:
-        print(f"[red][bold]Error![/red][/bold] You have not assigned all your blocks. Please try again.")
+        print("[red][bold]Error![/red][/bold] You have not assigned all your blocks. Please try again.")
         raise InvalidUserInput
 
     if args.debug:

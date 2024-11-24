@@ -3,7 +3,6 @@ from datetime import date
 from calendar import monthrange
 
 from tinydb import where
-from rich.pretty import pprint
 from rich.console import Console, Group
 from rich.panel import Panel
 from rich.progress import Progress, BarColumn, TaskProgressColumn, TextColumn, ProgressColumn
@@ -49,10 +48,10 @@ def month_overview(args: Namespace, db: TinyDBWrapper) -> None:
     days_in_month = monthrange(today.year, today.month)[1]
 
     with m_progress:
-        task = m_progress.add_task(f"Month", total=days_in_month)
+        task = m_progress.add_task("Month", total=days_in_month)
         m_progress.update(task, completed=today.day)
 
-        task = m_progress.add_task(f"Work Days", total=data['work_days_allocated'])
+        task = m_progress.add_task("Work Days", total=data['work_days_allocated'])
         m_progress.update(task, completed=data['work_days_completed'])
 
     with progress:

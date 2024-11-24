@@ -9,7 +9,7 @@ from fob.db import TinyDBWrapper
 def display_checklist(args: Namespace, db: TinyDBWrapper) -> None:
     try:
         checklist = db.all()[0]['checklist']
-    except KeyError:
+    except (IndexError, KeyError):
         print("[red][bold]No day data found.[/red][/bold]")
         print("Run [cyan][bold]fob gm[/cyan][/bold] to start a new day.")
         return
