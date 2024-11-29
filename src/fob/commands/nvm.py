@@ -8,6 +8,7 @@ from rich.prompt import Prompt
 
 from fob.commands.overviews.day_checklist import display_checklist
 from fob.db.wrapper import TinyDBWrapper
+from fob.db import checklist_complete
 
 
 def nvm(args: Namespace, db: TinyDBWrapper):
@@ -35,6 +36,13 @@ def nvm(args: Namespace, db: TinyDBWrapper):
     except KeyError:
         print("[red][bold]Program Error: Database seems to be malformed.[/red][/bold] (Database value at ['areas']['Buffer'] doesn't exist. Please report this issue. In the meantime, consider [cyan]fob reset[/cyan] to delete the database and start fresh.")
         return
+
+    # guard: today's checklist is all completed
+    if checklist_complete(db):
+        print("[green][bold]All blocks for today are completed![/green][/bold]")
+        print("Run [green][bold]fob gm[/green][/bold] to start a new day.")
+        return
+
 
     if args.debug:
         print("Buffer entry:")
