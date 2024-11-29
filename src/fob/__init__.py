@@ -1,8 +1,6 @@
 # This is the main entry point for the application.
 import sys
 import argparse
-from dataclasses import dataclass
-from datetime import date
 from pathlib import Path
 
 from rich import print
