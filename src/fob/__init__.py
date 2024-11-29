@@ -63,6 +63,11 @@ Try [cyan bold]fob help[/cyan bold] for usage information.
     subparsers.add_parser("nvm", help="Revise block assignment for today and change a non-Buffer block into a Buffer block, and mark that new Buffer block as complete.")
     args = parser.parse_args()
 
+    if args.command is None:
+        print("[red bold]Error:[/red bold] No command provided.")
+        print("\nTry [green][bold]fob help[/bold][/green] for usage information.")
+        return
+
     command_func = None
     try:
         command_func = getattr(fob.commands, args.command)
