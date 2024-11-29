@@ -1,4 +1,8 @@
 from argparse import Namespace
+import importlib.metadata
+
+from rich.pretty import pprint
+from rich import print
 
 from fob.db.wrapper import TinyDBWrapper
 
@@ -11,4 +15,4 @@ def info(args: Namespace, db: TinyDBWrapper):
     + Author
     + License
     '''
-    raise NotImplementedError("This command has not been implemented yet.")
+    return
