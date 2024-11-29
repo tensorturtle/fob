@@ -87,16 +87,16 @@ def nvm(args: Namespace, db: TinyDBWrapper):
         data['areas']['Buffer']['completed'] += 1
         data['areas'][area_to_decrement]['completed'] -= 1
 
+        q = Query()
+        db.update({"areas": data['areas']}, q.year == today.year and q.month == today.month)
+        db.update({"checklist": data['checklist']}, None)
+
+        # print success message
+        display_checklist(args, db)
+        print(f"[green][bold]Block {num_to_convert} converted to Buffer block successfully.[/green][/bold]")
+
     except ValueError:
         print("[red][bold]Please enter a number that corresponds to the checklist item[/red][/bold]")
     except KeyError:
         print("[red][bold]Program Error: Database seems to be malformed.[/red][/bold] Please report this issue. In the meantime, consider [cyan]fob reset[/cyan] to delete the database and start fresh.")
         return
-
-    q = Query()
-    db.update({"areas": data['areas']}, q.year == today.year and q.month == today.month)
-    db.update({"checklist": data['checklist']}, None)
-
-    # print success message
-    display_checklist(args, db)
-    print(f"[green][bold]Block {num_to_convert} converted to Buffer block successfully.[/green][/bold]")
