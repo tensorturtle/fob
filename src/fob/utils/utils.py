@@ -2,6 +2,10 @@ import os
 from pathlib import Path
 import platform
 import importlib.metadata
+from argparse import Namespace
+import sys
+
+from rich import print
 
 def get_app_version() -> tuple[str, str, str]:
     '''
@@ -12,6 +16,42 @@ def get_app_version() -> tuple[str, str, str]:
     version_string_of_foo = importlib.metadata.version('fob')
     major, minor, revision = version_string_of_foo.split(".")
     return (major, minor, revision)
+
+def get_db_path(args: Namespace) -> Path:
+    '''
+    Call this function to get the database path.
+    The priority is as follows (top is most prioritized)
+    + CLI argument
+    + ENV variable
+    + default path
+    '''
+    db_path_str = str(default_db_path())
+
+    if args.database is not None:
+        db_path_str = args.database
+            # override default path with custom path from CLI
+        if args.debug:
+            print(f"Using [bold]custom[/bold] database provided by CLI argument at [not bold][magenta]{db_path_str}[/not bold][/magenta]")
+
+    elif "FOB_DB_PATH" in os.environ:
+        db_path_str = os.environ["FOB_DB_PATH"]
+        if args.debug:
+            print(f"Using [bold]custom[/bold] database provided by ENV variable at [not bold][magenta]{db_path_str}[/not bold][/magenta]")
+    else:
+        # create necessary directories for default path in case they don't exist
+        if args.debug:
+            print(f"Using default database at [not bold][magenta]{db_path_str}[/not bold][/magenta]")
+
+    # convert to Path
+    try:
+        db_path = Path(db_path_str)
+        # create parents if they don't exist
+        db_path.parent.mkdir(parents=True, exist_ok=True)
+    except FileNotFoundError | PermissionError:
+        print(f"[red bold]Error:[/red bold] Unable to access database at [cyan]{db_path_str}[/cyan].")
+        sys.exit(1)
+
+    return db_path
 
 def default_db_path() -> Path:
     match platform.system():

@@ -1,14 +1,12 @@
 # This is the main entry point for the application.
 import sys
 import argparse
-from pathlib import Path
 
 from rich import print
 
 import fob.commands
-from fob.utils import default_db_path, check_db_exists
+from fob.utils import check_db_exists, get_db_path
 from fob.db import TinyDBWrapper
-
 
 def main():
     try:
@@ -77,11 +75,7 @@ Try [cyan bold]fob help[/cyan bold] for usage information.
         )
         sys.exit(1)
 
-    if not args.database:
-        # create necessary directories for default path in case they don't exist
-        default_db_path().parent.mkdir(parents=True, exist_ok=True)
-
-    db_path = Path(args.database or default_db_path())
+    db_path = get_db_path(args)
     if check_db_exists(args):
         if args.debug:
             print(f"Using [bold]existing[/bold] database at [not bold][magenta]{db_path}[/not bold][/magenta]")

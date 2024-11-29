@@ -1,25 +1,22 @@
 from argparse import Namespace
 from os import remove, rmdir
-from pathlib import Path
 
 from rich import print
 from rich.prompt import Prompt
 
-from fob.utils import default_db_path
-
+from fob.utils import get_db_path
 from fob.db import TinyDBWrapper
 
 
 def reset(args: Namespace, db: TinyDBWrapper) -> None:
-    db_path = args.database or default_db_path()
-    if not isinstance(db_path, Path):
-        db_path = Path(db_path)
+    db_path = get_db_path(args)
 
     print(f"[red bold]Warning![/red bold] This will delete the database file at [cyan]{db_path}[/cyan].")
 
     if Prompt.ask("Are you sure?", choices=["yes", "no"], default="no") == "no":
         print("Reset cancelled.")
         return
+
 
     try:
         remove(db_path)

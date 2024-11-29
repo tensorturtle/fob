@@ -1,8 +1,4 @@
 from argparse import Namespace
-import importlib.metadata
-
-from rich.pretty import pprint
-from rich import print
 
 from fob.db.wrapper import TinyDBWrapper
 
