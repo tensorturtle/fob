@@ -1,6 +1,7 @@
 [project]
 name = "fob"
-version = "0.2.0"
+# Remember to update the version number in 'commands/info.py' manually also.
+version = "0.2.1"
 description = "Focus Blocks: Simple and elegant daily time management tool."
 readme = "README.md"
 authors = [{ name = "tensorturtle", email = "tensorturtle@gmail.com" }]

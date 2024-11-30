@@ -1,21 +1,13 @@
 import os
 from pathlib import Path
 import platform
-import importlib.metadata
 from argparse import Namespace
 import sys
 
 from rich import print
 
-def get_app_version() -> tuple[str, str, str]:
-    '''
-    Reads the version (expected to be semver or similar (with three items separated by two dots))
-    from pyproject.toml and returns it as a tuple of three strings.
-    Not converted to ints because semver allows for non-numeric values.
-    '''
-    version_string_of_foo = importlib.metadata.version('fob')
-    major, minor, revision = version_string_of_foo.split(".")
-    return (major, minor, revision)
+def get_version_number() -> tuple[int, int, int]:
+    return (0,2,1)
 
 def get_db_path(args: Namespace) -> Path:
     '''
@@ -69,7 +61,7 @@ def default_db_path() -> Path:
     # we couple the database file name with the semver to force a new database on minor version changes
     # this is a simple way to ensure that the schema is up to date
     # on the user side, they should plan to update the app at the same time as when they are planning for the next month.
-    app_version = get_app_version()
+    app_version = get_version_number()
     major_and_minor_version = f"{app_version[0]}.{app_version[1]}"
     database_path = base_path / "fob" / f"app-{major_and_minor_version}.db"
     return database_path

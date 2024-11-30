@@ -9,6 +9,9 @@ from fob.db import TinyDBWrapper
 
 
 def reset(args: Namespace, db: TinyDBWrapper) -> None:
+    '''
+    Delete currently used database and parent directory if it's named 'fob' and empty.
+    '''
     db_path = get_db_path(args)
 
     print(f"[red bold]Warning![/red bold] This will delete the database file at [cyan]{db_path}[/cyan].")
@@ -25,8 +28,11 @@ def reset(args: Namespace, db: TinyDBWrapper) -> None:
         pass
     try:
         if db_path.parent.name == 'fob':
-            rmdir(db_path.parent)
-            print(f"\N{WHITE HEAVY CHECK MARK} Also [bold]deleted[/bold] parent directory [cyan]'fob'[/cyan] at [not bold][magenta]{db_path.parent}[/not bold][/magenta].")
+            try:
+                rmdir(db_path.parent)
+                print(f"\N{WHITE HEAVY CHECK MARK} Also [bold]deleted[/bold] parent directory [cyan]'fob'[/cyan] at [not bold][magenta]{db_path.parent}[/not bold][/magenta].")
+            except OSError:
+                print(f"[red]Warning:[/red] Parent directory [cyan]{db_path.parent}[/cyan] was not deleted. You may want to delete it manually.")
         else:
             print(f"[red]Warning:[/red] Parent directory [cyan]{db_path.parent}[/cyan] was not deleted. You may want to delete it manually.")
     except FileNotFoundError:

@@ -11,14 +11,12 @@ from fob.db.wrapper import TinyDBWrapper
 from fob.db import checklist_complete
 
 
-def nvm(args: Namespace, db: TinyDBWrapper):
+def didnt(args: Namespace, db: TinyDBWrapper):
     '''
-    'nvm' command: Abbreviation for 'Nevermind" - used to convert a non-Buffer block into a Buffer block.
+    Usage: fob didnt <number>
 
-    The user would run `fob sup` to see today's checklist.
-    If they succeed in completing a block, they would run `fob did (number)` to mark the block as done.
-    However, if they fail to do meaningful work on a block, or somehow circumstances made it so that they couldn't do the work assigned in that block, they can run `fob nvm (number)` to convert the block into a Buffer block and mark it as a complete Buffer block. Normally this kind of assignment is done one time at the beginning of the day through `fob gm`, but this command lets us override that.
-    This command fails and doesn't do anything in case there are no Buffer blocks left this month.
+    Convert a non-Buffer block into a Buffer block.
+    Used instead of 'did' when a block was not completed due to unforeseen circumstances.
     '''
     today = date.today()
     try:
@@ -61,7 +59,8 @@ def nvm(args: Namespace, db: TinyDBWrapper):
 
     # ask user which number they want to convert to buffer block
     try:
-        num_to_convert = int(Prompt.ask("Which number would you like to convert to a Buffer block?", default="1"))
+        # num_to_convert = int(Prompt.ask("Which number would you like to convert to a Buffer block?", default="1"))
+        num_to_convert = int(args.block_id)
         # validate input to be between 1 and number of blocks today
         num_blocks_today = len(data['checklist'])
         if num_to_convert < 1 or num_to_convert > num_blocks_today:

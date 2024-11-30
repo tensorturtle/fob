@@ -4,17 +4,22 @@ from argparse import Namespace
 from fob.db import TinyDBWrapper
 
 def help(args: Namespace | None, db: TinyDBWrapper | None) -> None:
+    '''
+    Print detailed help / usage information for this program.
+    '''
     print("""
 [green bold]Usage:[/green bold] [cyan][bold]fob[/bold] [OPTIONS] COMMAND[/cyan]
 
 A personal month-level daily block scheduler.
 
 [green bold]Common Commands:[/green bold]
-    [cyan bold]help[/cyan bold]        Show this help information and quit
-    [cyan bold]new_month[/cyan bold]   Allocate blocks for a new month
+    [cyan bold]help[/cyan bold]        Show this help information.
+    [cyan bold]info[/cyan bold]        Show information about this program.
+    [cyan bold]new_month[/cyan bold]   Allocate blocks for a new month.
     [cyan bold]gm[/cyan bold]          Start a new day by selecting the blocks you will work on today.
-    [cyan bold]sup[/cyan bold]         Quick look at the month and today's blocks
-    [cyan bold]nvm[/cyan bold]         Convert a block from today's checklist to to a 'Buffer' block.
+    [cyan bold]sup[/cyan bold]         Quick look at the month and today's blocks.
+    [cyan bold]did[/cyan bold]         Check off blocks from today's checklist.
+    [cyan bold]didnt[/cyan bold]       Convert a block from today's checklist to to a 'Buffer' block.
     [cyan bold]reset[/cyan bold]       Delete persistent database file.
 
 [green bold]Global Options:[/green bold]

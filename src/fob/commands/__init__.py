@@ -6,5 +6,5 @@ from fob.commands.sup import sup
 from fob.commands.new_month import new_month
 from fob.commands.reset import reset
 from fob.commands.did import did
-from fob.commands.nvm import nvm
+from fob.commands.didnt import didnt
 from fob.commands.info import info

@@ -57,8 +57,14 @@ Try [cyan bold]fob help[/cyan bold] for usage information.
         type=str,
         help="ID of the block to check off (int)",
     )
+    didnt_parser = subparsers.add_parser("didnt", help="Revise block assignment for today and change a non-Buffer block into a Buffer block, and mark that new Buffer block as complete.")
+    didnt_parser.add_argument(
+        "block_id",
+        type=str,
+        help="ID of the block to convert to a Buffer block and check off (int)",
+    )
+
     subparsers.add_parser("info", help="Show information about this program")
-    subparsers.add_parser("nvm", help="Revise block assignment for today and change a non-Buffer block into a Buffer block, and mark that new Buffer block as complete.")
     args = parser.parse_args()
 
     if args.command is None:

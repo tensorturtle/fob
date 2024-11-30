@@ -11,6 +11,9 @@ from fob.db import TinyDBWrapper
 from fob.db import MonthBlockData
 
 def new_month(args: Namespace, db: TinyDBWrapper) -> None:
+    '''
+    Assign blocks to areas for the new month.
+    '''
     result = loop_until_user_happy(args)
     if result is not None:
         write_new_month(result, db)

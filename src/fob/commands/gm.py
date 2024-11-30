@@ -18,6 +18,9 @@ class InvalidUserInput(Exception):
     pass
 
 def gm(args: Namespace, db: TinyDBWrapper) -> None:
+    '''
+    Assign blocks to the current day, selecting from remaining blocks for the month.
+    '''
     today = date.today()
     data = db.search(where('year') == today.year and where('month') == today.month)
 

@@ -7,7 +7,9 @@ from fob.db import checklist_complete
 
 def did(args, db):
     '''
-    Quickly check off a block from the day's checklist.
+    Usage: fob did <number>
+
+    Check off a block from the day's checklist.
 
     The user is expected to run `fob sup` prior to running this command,
     which displays the month overview and the day's checklist.
@@ -16,7 +18,7 @@ def did(args, db):
     Visually, it would exactly replace where the day's checklist was previously displayed,
     making it look like it was a GUI refresh.
 
-    args.block_id: str - contains the block number to mark as completed. The keys are str, so we just use str-ified ints.
+    args.block_id: str - contains the block number to mark as completed.
     '''
     try:
         checklist = db.all()[0]['checklist']
