@@ -57,4 +57,4 @@ def did(args, db):
         print("Start a new day: [green bold]fob gm[/green bold]")
         return
     else:
-        print("[green]Checklist updated.[/green] See overview: [cyan]fob sup[/cyan]")
+        print("[green]Checklist updated.[/green] See overview: [cyan][bold]fob sup[/cyan][/bold]")

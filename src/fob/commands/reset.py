@@ -38,4 +38,4 @@ def reset(args: Namespace, db: TinyDBWrapper) -> None:
     except FileNotFoundError:
         pass
 
-    print("\nNext: [green bold]fob new_month[/green bold]: Start a new month (creates a new database)")
+    print("\nStart a new month: [green bold]fob new_month[/green bold]")

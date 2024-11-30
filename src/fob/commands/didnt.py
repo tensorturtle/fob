@@ -53,9 +53,10 @@ def didnt(args: Namespace, db: TinyDBWrapper):
         print("Consider running: [cyan][bold]fob new_month[/cyan][/bold] if you want to reset the block allocations for this month.")
         return
 
-    # show user today's checklist
-    # also is a guard for: there are blocks assigned to this day (it could be that right before the first day of the month, the checklist is empty.)
-    display_checklist(args, db)
+    # guard for: there are blocks assigned to this day (it could be that right before the first day of the month, the checklist is empty.)
+    if len(data['checklist']) == 0:
+        print("[red][bold]Error: No blocks assigned to today. Run [cyan][bold]fob gm[/cyan][/bold] to assign blocks to today.[/red][/bold]")
+        return
 
     # ask user which number they want to convert to buffer block
     try:
@@ -92,7 +93,7 @@ def didnt(args: Namespace, db: TinyDBWrapper):
 
         # print success message
         display_checklist(args, db)
-        print(f"[green][bold]Block {num_to_convert} converted to Buffer block successfully.[/green][/bold]")
+        print(f"[green]Block {num_to_convert} converted to Buffer block.[/green] See overview: [cyan][bold]fob sup[/cyan][/bold]")
 
     except ValueError:
         print("[red][bold]Please enter a number that corresponds to the checklist item[/red][/bold]")

@@ -11,4 +11,5 @@ def sup(args: Namespace, db: TinyDBWrapper) -> None:
     '''
     month_overview(args, db)
     display_checklist(args, db)
-    print("Next commands: [green][bold]fob did (number)[/green][/bold] check off today's blocks.")
+    print("Mark a block as done: [green][bold]fob did <number>[/green][/bold]")
+    print("Convert a block to Buffer: [cyan][bold]fob didnt <number>[/cyan][/bold]")

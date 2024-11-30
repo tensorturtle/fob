@@ -6,6 +6,7 @@ from rich.prompt import Prompt
 from rich import print
 from rich.table import Table
 from rich.console import Console
+from tinydb import where, Query
 
 from fob.db import TinyDBWrapper
 from fob.db import MonthBlockData
@@ -18,7 +19,7 @@ def new_month(args: Namespace, db: TinyDBWrapper) -> None:
     if result is not None:
         write_new_month(result, db)
         print("\n[green]New month successfully created![/green]")
-        print("Next commands: [green bold]fob gm[/green bold] - Start your day with the good morning command.")
+        print("Start your day: [green bold]fob gm[/green bold]")
 
 def write_new_month(data: MonthBlockData, db: TinyDBWrapper) -> None:
     areas = {}
@@ -28,15 +29,16 @@ def write_new_month(data: MonthBlockData, db: TinyDBWrapper) -> None:
             "completed": 0,
         }
 
-    #!TODO - Add a check to see if the year-month already exists
-    db.insert({
+    # Overwrite the existing month data (shouldn't happen but avoids duplicates)
+    q = Query()
+    db.update({
         "year": data.year,
         "month": data.month,
         "work_days_allocated": data.work_days_allocated,
         "work_days_completed": 0,
         "blocks_per_day": data.blocks_per_day,
         "areas": areas,
-    })
+    }, q.year == data.year and q.month == data.month)
 
 def loop_until_user_happy(args: Namespace) -> MonthBlockData | None:
     user_is_happy = False

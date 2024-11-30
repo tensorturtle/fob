@@ -48,8 +48,10 @@ def gm(args: Namespace, db: TinyDBWrapper) -> None:
     print("[bold]Today's Checklist:[/bold]")
     display_checklist(args, db)
 
-    print("Next commands: [cyan][bold]fob sup[/cyan][/bold] to see the above overviews again.")
-    print("[green][bold]fob did (number) [/green][/bold] to mark a block as done.")
+    print("[green]New day started.[/green]")
+    print("See overview: [cyan][bold]fob sup[/cyan][/bold]")
+    print("Mark a block as done: [green][bold]fob did <number>[/green][/bold]")
+    print("Convert a block to Buffer: [cyan][bold]fob didnt <number>[/cyan][/bold]")
 
 
 def new_day(args: Namespace, db: TinyDBWrapper, data) -> None:
@@ -126,12 +128,6 @@ def new_day(args: Namespace, db: TinyDBWrapper, data) -> None:
         print("Database updated successfully.")
         print(Panel(Pretty(db.search(q.year == today.year and q.month == today.month))))
 
-    # also create a 'today' entry (for day overview) with the newly assigned blocks
-    # today_data = {
-    #     "today": today_areas,
-    # }
-    # db.update({"today": today_areas}, None)
-
     checklist = dict()
     i = 0
     for area_name, blocks in today_areas.items():
@@ -145,5 +141,3 @@ def new_day(args: Namespace, db: TinyDBWrapper, data) -> None:
     if args.debug:
         print("Today's data:")
         print(Panel(Pretty(checklist)))
-
-    # updated checklist
