@@ -14,6 +14,9 @@ class TinyDBWrapper:
         # Insert a document (dictionary) into the database
         return self.db.insert(data)
 
+    def upsert(self, fields, query):
+        return self.db.upsert(fields, query)
+
     def all(self):
         # Get all documents stored in the database
         return self.db.all()

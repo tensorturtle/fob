@@ -31,7 +31,7 @@ def write_new_month(data: MonthBlockData, db: TinyDBWrapper) -> None:
 
     # Overwrite the existing month data (shouldn't happen but avoids duplicates)
     q = Query()
-    db.update({
+    db.upsert({
         "year": data.year,
         "month": data.month,
         "work_days_allocated": data.work_days_allocated,
