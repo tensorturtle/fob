@@ -1,6 +1,6 @@
 [project]
 name = "fob"
-# Remember to update the version number in 'commands/info.py' manually also.
+# Remember to update the version number in 'utils/utils.py' manually also.
 version = "0.2.1"
 description = "Focus Blocks: Simple and elegant daily time management tool."
 readme = "README.md"
