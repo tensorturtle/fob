@@ -61,7 +61,7 @@ export FOB_DB_PATH="~/Dropbox/my-fob.db"
 
 Since we're not using a SQL database, we are responsible for upholding the integrity and consistency of the data before writing it to the database. We implement that by first receiving all the data from the user, validating it, and then 'commiting' (writing) to the database in one go.
 
-Run the program with debug option `fob -x` or `fob --debug` to see how the database gets updated. Also, the so-called database is actually just a human-readable JSON file, so you can open that to inspect / edit it if you're developing `fob`.
+Run the program with debug option `fob -x` or `fob --debug` to see how the database gets updated. Also, the so-called database is actually just a human-readable JSON file, so you can open that to inspect / edit it if you're developing `fob`. Use `fob info` to see where the database is located.
 
 ## Compiling to C
 
