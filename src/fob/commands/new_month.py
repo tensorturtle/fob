@@ -71,7 +71,7 @@ def simplify_value_errors(func):
     return wrapper
 
 
-@simplify_value_errors
+#@simplify_value_errors
 def converse_with_user(args: Namespace) ->MonthBlockData:
     print("New month! Let's allocate blocks for the upcoming month.")
     print(
@@ -83,7 +83,9 @@ def converse_with_user(args: Namespace) ->MonthBlockData:
             f"Today is {today}. It's probably time to allocate blocks for the next month."
         )
         today = today.replace(day=1)
-        today = today.replace(month=today.month + 1)
+        # Modulo math to handle December (increment year and return month to 1)
+        today = today.replace(year=today.year + ((today.month + 1) // 12))
+        today = today.replace(month=(today.month + 1) % 12)
     year = Prompt.ask("\nWhat year?", default=str(today.year))
     month = Prompt.ask("What month?", default=str(today.month))
 
