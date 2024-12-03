@@ -14,7 +14,7 @@ Download the program from the latest [Github release](https://github.com/tensort
 
 A `curl | sh` type of installation script for the the lazy is coming soon.
 
-`fob` runs on Mac, Linux, and Windows. In practice, it's only tested on Mac and Linux.
+`fob` is currently compiled and released for ARM Mac (M1 onwards) just because that's the machine I run it on. Testing and support for Windows and Ubuntu is coming soon™.
 
 On Mac, you may need to go to "System Settings" -> "Privacy & Security" to allow `fob` to run. By default, Mac shows scary warnings and doesn't let you run just any program.
 
@@ -47,7 +47,11 @@ From the root of this repository, run `dev_install.sh`. It uses nuitka to compil
 fob --database ~/Dropbox/my-fob.db help
 ```
 
-For now, you must enter this option manually each time. There willbe more convenient methods coming soon.
+For more convenience, you can export a `FOB_DB_PATH` variable in your shell.
+For example, if you're using bash shell, add the following line to `~/.bashrc`:
+```
+export FOB_DB_PATH="~/Dropbox/my-fob.db"
+```
 
 # Inner Workings
 
