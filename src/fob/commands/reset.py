@@ -32,10 +32,10 @@ def reset(args: Namespace, db: TinyDBWrapper) -> None:
                 rmdir(db_path.parent)
                 print(f"\N{WHITE HEAVY CHECK MARK} Also [bold]deleted[/bold] parent directory [cyan]'fob'[/cyan] at [not bold][magenta]{db_path.parent}[/not bold][/magenta].")
             except OSError:
-                print(f"[red]Warning:[/red] Parent directory [cyan]{db_path.parent}[/cyan] was not deleted. You may want to delete it manually.")
+                print(f"[red]Warning:[/red] Parent directory [yellow]{db_path.parent}[/yellow] was not deleted. You may want to delete it manually.")
         else:
-            print(f"[red]Warning:[/red] Parent directory [cyan]{db_path.parent}[/cyan] was not deleted. You may want to delete it manually.")
+            print(f"[red]Warning:[/red] Parent directory [yellow]{db_path.parent}[/yellow] was not deleted. You may want to delete it manually.")
     except FileNotFoundError:
         pass
 
-    print("\nStart a new month: [green bold]fob new_month[/green bold]")
+    print("\nStart a new month: [green][bold]fob new_month[/green][/bold]")

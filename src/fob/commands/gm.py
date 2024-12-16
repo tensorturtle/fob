@@ -26,11 +26,11 @@ def gm(args: Namespace, db: TinyDBWrapper) -> None:
 
     if len(data) == 0:
         print("[red][bold]No month data found.[/red][/bold]")
-        print("Please run [green bold]fob new_month[/green bold] to create a new month of blocks.")
+        print("Please run [green]fob new_month[/green] to create a new month of blocks.")
         return
     if len(data) > 1:
         print("[red][bold]Error![/red] More than one entry for the month has been found. This is a bug in the program. Please report it.")
-        print("In the meantime, consider running [bold][cyan]fob reset[/cyan][/bold].")
+        print("In the meantime, consider running [green]fob reset[/green].")
         return
 
     print("Good morning! \N{SUNRISE}")
@@ -49,15 +49,15 @@ def gm(args: Namespace, db: TinyDBWrapper) -> None:
     display_checklist(args, db)
 
     print("[green]New day started.[/green]")
-    print("See overview: [cyan][bold]fob sup[/cyan][/bold]")
-    print("Mark a block as done: [green][bold]fob did <number>[/green][/bold]")
-    print("Convert a block to Buffer: [cyan][bold]fob didnt <number>[/cyan][/bold]")
+    print("See overview: [green]fob sup[/green]")
+    print("Mark a block as done: [green]fob did [no bold]<number>[/no bold][/green]")
+    print("Convert a block to Buffer: [green]fob didnt [no bold]<number>[/no bold][/green]")
 
 
 def new_day(args: Namespace, db: TinyDBWrapper, data) -> None:
     if data['work_days_completed'] >= data['work_days_allocated']:
         print("\n[green]All work days have been completed for this month. Great job![/green]\n")
-        print("Start a new month: [green bold]fob new_month[/green bold]")
+        print("Start a new month: [green][bold]fob new_month[/green][/bold]")
         return
 
     if Prompt.ask("Assign blocks to this new day?", choices=["yes", "no"], default="yes" if checklist_complete(db) else "no") == "no":

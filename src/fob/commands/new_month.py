@@ -19,7 +19,7 @@ def new_month(args: Namespace, db: TinyDBWrapper) -> None:
     if result is not None:
         write_new_month(result, db)
         print("\n[green]New month successfully created![/green]")
-        print("Start your day: [green bold]fob gm[/green bold]")
+        print("Start your day: [green][bold]fob gm[/green][/bold]")
 
 def write_new_month(data: MonthBlockData, db: TinyDBWrapper) -> None:
     areas = {}
@@ -75,7 +75,7 @@ def simplify_value_errors(func):
 def converse_with_user(args: Namespace) ->MonthBlockData:
     print("New month! Let's allocate blocks for the upcoming month.")
     print(
-        "Press [cyan bold]enter[/cyan bold] to accept the [cyan bold](default value)[/cyan bold]."
+        "Press [cyan][bold]enter[/cyan][/bold] to accept the [cyan][bold](default value)[/cyan][/bold]."
     )
     today = date.today()
     if today.day > 2:

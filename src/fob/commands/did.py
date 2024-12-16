@@ -24,15 +24,15 @@ def did(args, db):
         checklist = db.all()[0]['checklist']
     except IndexError:
         print("[red][bold]No day data found.[/red][/bold]")
-        print("Run [cyan][bold]fob gm[/cyan][/bold] to start a new day.")
+        print("Run [green][bold]fob gm[/green][/bold] to start a new day.")
         return
     if args.debug:
         print("Checklist from DB:")
         pprint(checklist)
 
     if checklist_complete(db):
-        print("\n[green]All blocks have already been completed. No changes made.[/green]")
-        print("Start a new day: [green bold]fob gm[/green bold]")
+        print("\n[green]All blocks have already been completed.[/green] No changes made.")
+        print("Start a new day: [green][bold]fob gm[/green][/bold]")
         return
 
     # check that the block_id is within range
@@ -54,7 +54,7 @@ def did(args, db):
 
     if checklist_complete(db):
         print("[green]All blocks have been completed![/green]")
-        print("Start a new day: [green bold]fob gm[/green bold]")
+        print("Start a new day: [green][bold]fob gm[/green][/bold]")
         return
     else:
-        print("[green]Checklist updated.[/green] See overview: [cyan][bold]fob sup[/cyan][/bold]")
+        print("[green]Checklist updated.[/green] See overview: [green][bold]fob sup[/green][/bold]")
