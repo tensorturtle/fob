@@ -12,9 +12,9 @@
 
 Download the program from the latest [Github release](https://github.com/tensorturtle/fob/releases) and put it somewhere on PATH.
 
-A `curl | sh` type of installation script for the the lazy is coming soon.
+A `curl | sh` type of installation script for the the lazy is coming soon™.
 
-`fob` runs on Mac, Linux, and Windows. In practice, it's only tested on Mac and Linux.
+`fob` is currently compiled and released for ARM Mac (M1 onwards) just because that's the machine I run it on. Testing and support for Windows and Ubuntu is coming soon™.
 
 On Mac, you may need to go to "System Settings" -> "Privacy & Security" to allow `fob` to run. By default, Mac shows scary warnings and doesn't let you run just any program.
 
@@ -47,7 +47,11 @@ From the root of this repository, run `dev_install.sh`. It uses nuitka to compil
 fob --database ~/Dropbox/my-fob.db help
 ```
 
-For now, you must enter this option manually each time. There willbe more convenient methods coming soon.
+For more convenience, you can export a `FOB_DB_PATH` variable in your shell.
+For example, if you're using bash shell, add the following line to `~/.bashrc`:
+```
+export FOB_DB_PATH="~/Dropbox/my-fob.db"
+```
 
 # Inner Workings
 
@@ -57,7 +61,7 @@ For now, you must enter this option manually each time. There willbe more conven
 
 Since we're not using a SQL database, we are responsible for upholding the integrity and consistency of the data before writing it to the database. We implement that by first receiving all the data from the user, validating it, and then 'commiting' (writing) to the database in one go.
 
-Run the program with debug option `fob -x` or `fob --debug` to see how the database gets updated. Also, the so-called database is actually just a human-readable JSON file, so you can open that to inspect / edit it if you're developing `fob`.
+Run the program with debug option `fob -x` or `fob --debug` to see how the database gets updated. Also, the so-called database is actually just a human-readable JSON file, so you can open that to inspect / edit it if you're developing `fob`. Use `fob info` to see where the database is located.
 
 ## Compiling to C
 
