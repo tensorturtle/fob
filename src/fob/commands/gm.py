@@ -50,8 +50,8 @@ def gm(args: Namespace, db: TinyDBWrapper) -> None:
 
     print("[green]New day started.[/green]")
     print("See overview: [green]fob sup[/green]")
-    print("Mark a block as done: [green]fob did [no bold]<number>[/no bold][/green]")
-    print("Convert a block to Buffer: [green]fob didnt [no bold]<number>[/no bold][/green]")
+    print("Mark a block as done: [green]fob did [not bold]<number>[/not bold][/green]")
+    print("Convert a block to Buffer: [green]fob didnt [not bold]<number>[/not bold][/green]")
 
 
 def new_day(args: Namespace, db: TinyDBWrapper, data) -> None:
