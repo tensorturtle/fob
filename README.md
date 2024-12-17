@@ -37,6 +37,8 @@ uv run fob
 
 From the root of this repository, run `dev_install.sh`. It uses nuitka to compile the python code into a single file executable, and then installs it to the system.
 
+Create a new Github Release with a new tag and upload the executable (path should be shown by `dev_install.sh`) to the Github Release.
+
 # Features
 
 ## Share your database across different machines.
