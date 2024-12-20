@@ -1,6 +1,7 @@
 ![banner](/assets/banner.png)
 
 # `fob`
+[![Build & Test](https://github.com/tensorturtle/fob/actions/workflows/tests.yaml/badge.svg?branch=main)](https://github.com/tensorturtle/fob/actions/workflows/tests.yaml)
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
@@ -65,4 +66,3 @@ For example, to use a database synchronized across devices on your Dropbox,
 add the following line to `~/.bashrc` (for bash shell):
 ```
 export FOB_DB_PATH="~/Dropbox/my-fob.db"
-```
