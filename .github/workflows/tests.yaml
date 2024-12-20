@@ -1,12 +1,16 @@
-name: Run Tests
+name: Build & Test
 
 on:
   push:
     branches:
-     - main
+      - main
+    paths-ignore:
+      - "**/*.md"
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - "**/*.md"
 
 jobs:
   run-tests:
@@ -20,6 +24,7 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v4
         with:
+          version: "0.5.11" # Pinning to a specific version
           enable-cache: true # Enable caching for faster builds
 
       - name: Set up Python
@@ -30,4 +35,3 @@ jobs:
 
       - name: Run tests
         run: uvx pytest
- 
