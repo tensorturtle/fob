@@ -35,7 +35,7 @@ uv run fob
 
 # Release
 
-From the root of this repository, run `dev_install.sh`. It uses nuitka to compile the python code into a single file executable, and then installs it to the system.
+From the root of this repository, run `dev_install.sh`. It uses pyinstaller to create a standalone binary and places it in `~/.local/bin` for access from anywhere on the system.
 
 Create a new Github Release with a new tag and upload the executable (path should be shown by `dev_install.sh`) to the Github Release.
 
@@ -61,10 +61,6 @@ export FOB_DB_PATH="~/Dropbox/my-fob.db"
 
 [`TinyDB`](https://github.com/msiemens/tinydb) is used to persist the data as a human-readable JSON file.
 
-Since we're not using a SQL database, we are responsible for upholding the integrity and consistency of the data before writing it to the database. We implement that by first receiving all the data from the user, validating it, and then 'commiting' (writing) to the database in one go.
+Since we're not using a SQL database, we are responsible for upholding the integrity and consistency of the data before writing it to the database. We implement that by first receiving all the data from the user, validating it, and then 'committing' (writing) to the database in one go.
 
 Run the program with debug option `fob -x` or `fob --debug` to see how the database gets updated. Also, the so-called database is actually just a human-readable JSON file, so you can open that to inspect / edit it if you're developing `fob`. Use `fob info` to see where the database is located.
-
-## Compiling to C
-
-We use [`nuitka`](https://nuitka.net/) to compile to C in order to create self-contained binaries for each platform. See [`dev_install.sh`](/dev_install.sh) for how  it's used.

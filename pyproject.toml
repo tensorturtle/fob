@@ -6,10 +6,11 @@ description = "Focus Blocks: Simple and elegant daily time management tool."
 readme = "README.md"
 authors = [{ name = "tensorturtle", email = "tensorturtle@gmail.com" }]
 requires-python = ">=3.12"
-dependencies = ["rich>=13.9.4", "tinydb>=4.8.2"]
+dependencies = [
+    "pyinstaller>=6.11.1",
+    "rich>=13.9.4",
+    "tinydb>=4.8.2",
+]
 
 [project.scripts]
 fob = "fob:main"
-
-[tool.uv]
-dev-dependencies = ["nuitka>=2.4.11"]
