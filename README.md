@@ -34,7 +34,7 @@ uv run fob
 
 The `--debug` option may be helpful. Also, the so-called database is actually just a human-readable/editable JSON file. Use `fob info` to see where the database is located.
 
-# Test
+# Testing
 
 ```
 uvx pytest
@@ -46,7 +46,7 @@ This is an end-to-end test. It installs `fob` to a temporary directory using `in
 
 From the root of this repository, run `./install.sh`. It uses pyinstaller to create a standalone binary and places it in `~/.local/bin` for access from anywhere on the system.
 
-Create a new Github Release with a new tag and upload the executable. The binary is at: `dist/fob`.
+Create a new Github Release with a new tag and upload the newly created executable.
 
 # Features
 
