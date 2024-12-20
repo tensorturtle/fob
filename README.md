@@ -13,9 +13,7 @@
 
 Download the program from the latest [Github release](https://github.com/tensorturtle/fob/releases) and put it somewhere on PATH.
 
-A `curl | sh` type of installation script for the the lazy is coming soon™.
-
-`fob` is currently compiled and released for ARM Mac (M1 onwards) just because that's the machine I run it on. Testing and support for Windows and Ubuntu is coming soon™.
+`fob` is currently compiled and released for M-series Macs and Linux.
 
 On Mac, you may need to go to "System Settings" -> "Privacy & Security" to allow `fob` to run. By default, Mac shows scary warnings and doesn't let you run just any program.
 
