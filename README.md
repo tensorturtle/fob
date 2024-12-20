@@ -51,9 +51,19 @@ uvx pytest
 
 This is an end-to-end test. It installs `fob` to a temporary directory using `install.sh` and runs commands against it. Github Actions is set up to run the same test upon pushing to main branch.
 
-# Release
+# Build & Release
 
-From the root of this repository, run `./install.sh`. It uses pyinstaller to create a standalone binary and places it in `~/.local/bin` for access from anywhere on the system.
+```
+./install.sh
+```
+
+This installation script uses pyinstaller to create a standalone binary and places it in `~/.local/bin` for access from anywhere on the system.
+
+The script accepts an optional output directory for your convenience. For example,
+
+```
+./install.sh ~/Downloads
+```
 
 Create a new Github Release with a new tag and upload the newly created executable.
 
