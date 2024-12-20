@@ -33,17 +33,19 @@ Run app in development:
 uv run fob
 ```
 
+The `--debug` option may be helpful. Also, the so-called database is actually just a human-readable/editable JSON file. Use `fob info` to see where the database is located.
+
 # Test
 
 ```
 uvx pytest
 ```
 
-This is an end-to-end test. It installs `fob` to a temporary directory using `install.sh` and runs commands against it.
+This is an end-to-end test. It installs `fob` to a temporary directory using `install.sh` and runs commands against it. Github Actions is set up to run the same test upon pushing to main branch.
 
 # Release
 
-From the root of this repository, run `install.sh`. It uses pyinstaller to create a standalone binary and places it in `~/.local/bin` for access from anywhere on the system.
+From the root of this repository, run `./install.sh`. It uses pyinstaller to create a standalone binary and places it in `~/.local/bin` for access from anywhere on the system.
 
 Create a new Github Release with a new tag and upload the executable. The binary is at: `dist/fob`.
 
@@ -64,13 +66,3 @@ add the following line to `~/.bashrc` (for bash shell):
 ```
 export FOB_DB_PATH="~/Dropbox/my-fob.db"
 ```
-
-# Inner Workings
-
-## Database
-
-[`TinyDB`](https://github.com/msiemens/tinydb) is used to persist the data as a human-readable JSON file.
-
-Since we're not using a SQL database, we are responsible for upholding the integrity and consistency of the data before writing it to the database. We implement that by first receiving all the data from the user, validating it, and then 'committing' (writing) to the database in one go.
-
-Run the program with debug option `fob -x` or `fob --debug` to see how the database gets updated. Also, the so-called database is actually just a human-readable JSON file, so you can open that to inspect / edit it if you're developing `fob`. Use `fob info` to see where the database is located.
