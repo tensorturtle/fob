@@ -20,9 +20,9 @@ def run_app():
         print(
             '''[red][bold]Incorrect usage.[/bold][/red]
 
-[green][bold]Usage:[/bold][/green] [cyan][bold]fob[/bold] [OPTIONS] <command>[/cyan]
+[cyan][bold]Usage:[/bold][/cyan] [green][bold]fob[/bold] [OPTIONS] <command>[/green]
 
-Try [cyan bold]fob help[/cyan bold] for usage information.
+Try [green][bold]fob help[/green][/bold] for usage information.
 '''
         )
         sys.exit(1)

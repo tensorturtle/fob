@@ -40,7 +40,7 @@ def get_db_path(args: Namespace) -> Path:
         # create parents if they don't exist
         db_path.parent.mkdir(parents=True, exist_ok=True)
     except FileNotFoundError | PermissionError:
-        print(f"[red bold]Error:[/red bold] Unable to access database at [cyan]{db_path_str}[/cyan].")
+        print(f"[red bold]Error:[/red bold] Unable to access database at [cyan][not bold]{db_path_str}[/cyan][not bold].")
         sys.exit(1)
 
     return db_path

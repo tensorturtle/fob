@@ -11,7 +11,7 @@ def display_checklist(args: Namespace, db: TinyDBWrapper) -> None:
         checklist = db.all()[0]['checklist']
     except (IndexError, KeyError):
         print("[red][bold]No day data found.[/red][/bold]")
-        print("Run [cyan][bold]fob gm[/cyan][/bold] to start a new day.")
+        print("Run [green][bold]fob gm[/green][/bold] to start a new day.")
         return
     if args.debug:
         print("Checklist from DB:")

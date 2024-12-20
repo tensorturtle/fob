@@ -14,7 +14,7 @@ def reset(args: Namespace, db: TinyDBWrapper) -> None:
     '''
     db_path = get_db_path(args)
 
-    print(f"[red bold]Warning![/red bold] This will delete the database file at [cyan]{db_path}[/cyan].")
+    print(f"[red bold]Warning![/red bold] This will delete the database file at [cyan][not bold]{db_path}[/cyan][/not bold]")
 
     if Prompt.ask("Are you sure?", choices=["yes", "no"], default="no") == "no":
         print("Reset cancelled.")
@@ -30,7 +30,7 @@ def reset(args: Namespace, db: TinyDBWrapper) -> None:
         if db_path.parent.name == 'fob':
             try:
                 rmdir(db_path.parent)
-                print(f"\N{WHITE HEAVY CHECK MARK} Also [bold]deleted[/bold] parent directory [cyan]'fob'[/cyan] at [not bold][magenta]{db_path.parent}[/not bold][/magenta].")
+                print(f"\N{WHITE HEAVY CHECK MARK} Also [bold]deleted[/bold] parent directory [cyan]'fob'[/cyan] at [not bold][cyan]{db_path.parent}[/not bold][/cyan].")
             except OSError:
                 print(f"[red]Warning:[/red] Parent directory [yellow]{db_path.parent}[/yellow] was not deleted. You may want to delete it manually.")
         else:

@@ -15,6 +15,13 @@ if ! [ -x "$(command -v uv)" ]; then
     exit 1
 fi
 
+# Check for custom installation path
+if [ -z "$1" ]; then
+    INSTALL_PATH="$HOME/.local/bin"
+else
+    INSTALL_PATH="$1"
+fi
+
 # Activate the virtual environment
 uv venv
 source .venv/bin/activate
@@ -25,20 +32,14 @@ uv add pyinstaller
 # Call the tool
 pyinstaller --onefile --name fob src/fob/__init__.py
 
-# Copy the executable to somewhere on your PATH
-DEST_PATH="$HOME/.local/bin"
+# Copy the executable to the custom installation path
+echo "Copying the executable to $INSTALL_PATH..."
 
-# Delete previous version
-rm "$DEST_PATH/fob"
-
-# Copy the executable to somewhere on your PATH
-echo "Copying the executable to $DEST_PATH..."
-
-mkdir -p "$DEST_PATH"
-cp dist/fob "$DEST_PATH"
+mkdir -p "$INSTALL_PATH"
+cp dist/fob "$INSTALL_PATH"
 
 # Clean up
 echo "Cleaning up..."
 rm -r dist build fob.spec
 
-echo "Installation complete. The 'fob' command is now available. If not, please check that $DEST_PATH is in your PATH environment variable."
+echo "Installation complete. The 'fob' command is now available in $INSTALL_PATH. If not, please check that $INSTALL_PATH is in your PATH environment variable."

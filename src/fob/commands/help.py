@@ -22,7 +22,7 @@ A personal month-level daily block scheduler.
     [green bold]didnt[/green bold]       Convert a block from today's checklist to to a 'Buffer' block.
     [green bold]reset[/green bold]       Delete persistent database file.
 
-[green bold]Global Options:[/green bold]
+[cyan bold]Global Options:[/cyan bold]
     [green bold]-d, --database[/green bold] [magenta not bold]<PATH_TO_DB_FILE>[/magenta not bold]  Path to database file. You can use a cloud storage (eg. Dropbox) to sync the database across devices.
     [green bold]-x, --debug[/green bold]  Enable debug mode.
 

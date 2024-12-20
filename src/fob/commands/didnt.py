@@ -93,7 +93,7 @@ def didnt(args: Namespace, db: TinyDBWrapper):
 
         # print success message
         display_checklist(args, db)
-        print(f"[green]Block {num_to_convert} converted to Buffer block.[/green] See overview: [cyan]fob sup[/cyan]")
+        print(f"[green]Block {num_to_convert} converted to Buffer block.[/green] See overview: [green]fob sup[/green]")
 
     except ValueError:
         print("[red][bold]Please enter a number that corresponds to the checklist item[/red][/bold]")

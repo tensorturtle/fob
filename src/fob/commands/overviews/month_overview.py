@@ -24,7 +24,7 @@ def month_overview(args: Namespace, db: TinyDBWrapper) -> None:
         data = db.search(where('year') == today.year and where('month') == today.month)[0]
     except IndexError:
         print("[red][bold]No month data found.[/red][/bold]")
-        print("Run [cyan][bold]fob new_month[/cyan][/bold] to start a new month.")
+        print("Run [green][bold]fob new_month[/green][/bold] to start a new month.")
         return
 
     console = Console()

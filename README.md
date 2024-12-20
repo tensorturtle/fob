@@ -33,11 +33,19 @@ Run app in development:
 uv run fob
 ```
 
+# Test
+
+```
+uvx pytest
+```
+
+This is an end-to-end test. It installs `fob` to a temporary directory using `install.sh` and runs commands against it.
+
 # Release
 
-From the root of this repository, run `dev_install.sh`. It uses pyinstaller to create a standalone binary and places it in `~/.local/bin` for access from anywhere on the system.
+From the root of this repository, run `install.sh`. It uses pyinstaller to create a standalone binary and places it in `~/.local/bin` for access from anywhere on the system.
 
-Create a new Github Release with a new tag and upload the executable (path should be shown by `dev_install.sh`) to the Github Release.
+Create a new Github Release with a new tag and upload the executable. The binary is at: `dist/fob`.
 
 # Features
 
@@ -50,7 +58,9 @@ fob --database ~/Dropbox/my-fob.db help
 ```
 
 For more convenience, you can export a `FOB_DB_PATH` variable in your shell.
-For example, if you're using bash shell, add the following line to `~/.bashrc`:
+
+For example, to use a database synchronized across devices on your Dropbox,
+add the following line to `~/.bashrc` (for bash shell):
 ```
 export FOB_DB_PATH="~/Dropbox/my-fob.db"
 ```
