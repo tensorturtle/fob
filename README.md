@@ -11,9 +11,18 @@
 
 # Quick Start
 
-Download the program from the latest [Github release](https://github.com/tensorturtle/fob/releases) and put it somewhere on PATH.
+Download the Mac or Linux compatible binaries from the latest [Github release](https://github.com/tensorturtle/fob/releases) > Assets.
 
-`fob` is currently compiled and released for M-series Macs and Linux.
+Make it executable (replace the fob... with the file name)
+```
+sudo chmod +x fob...
+```
+
+Move it to somewhere on PATH, typically `~/.local/bin`. Rename it to `fob` also.
+
+```
+mv ~/Downloads/fob... ~/.local/bin/fob
+```
 
 On Mac, you may need to go to "System Settings" -> "Privacy & Security" to allow `fob` to run. By default, Mac shows scary warnings and doesn't let you run just any program.
 
