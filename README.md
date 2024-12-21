@@ -24,7 +24,7 @@ Move it to somewhere on PATH, typically `~/.local/bin`. Rename it to `fob` also.
 mv ~/Downloads/fob... ~/.local/bin/fob
 ```
 
-On Mac, you may need to go to "System Settings" -> "Privacy & Security" to allow `fob` to run. By default, Mac shows scary warnings and doesn't let you run just any program.
+On Mac, you may need to go to "System Settings" -> "Privacy & Security" to allow `fob` to run. By default, Mac shows scary warnings and doesn't let you run just any program. If you can't get it to work, follow the next steps to install it from source.
 
 # Development
 
