@@ -69,17 +69,17 @@ Create a new Github Release with a new tag and upload the newly created executab
 
 # Features
 
-## Share your database across different machines.
+## Cloud Sync
 
-`fob` stores all state within a single database file (which is actually just a human-readable JSON file). Pass in a path on a shared drive (e.g. Dropbox) to the `--database` option when running `fob`. For example:
+Bring your own cloud.
+
+`fob` runs on a single database file. You can store this database on Dropbox or your own cloud. Just pass the path to the `--database` option when running `fob`. For example:
 
 ```
 fob --database ~/Dropbox/my-fob.db help
 ```
 
 For more convenience, you can export a `FOB_DB_PATH` variable in your shell.
-
-For example, to use a database synchronized across devices on your Dropbox,
-add the following line to `~/.bashrc` (for bash shell):
+For example, add the following line to `~/.bashrc` (for bash shell):
 ```
 export FOB_DB_PATH="~/Dropbox/my-fob.db"
