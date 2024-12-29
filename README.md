@@ -36,47 +36,6 @@ This will compile and install `fob`. Now you can run:
 fob help
 ```
 
-# Development
-
-[Install uv](https://docs.astral.sh/uv/getting-started/installation/)
-
-Clone this repository:
-```
-git clone https://github.com/tensorturtle/fob.git
-cd fob
-```
-
-Run app in development:
-```
-uv run fob
-```
-
-The `--debug` option may be helpful. Also, the so-called database is actually just a human-readable/editable JSON file. Use `fob info` to see where the database is located.
-
-# Testing
-
-```
-uvx pytest
-```
-
-This is an end-to-end test. It installs `fob` to a temporary directory using `install.sh` and runs commands against it. Github Actions is set up to run the same test upon pushing to main branch.
-
-# Build & Release
-
-```
-./install.sh
-```
-
-This installation script uses pyinstaller to create a standalone binary and places it in `~/.local/bin` for access from anywhere on the system.
-
-The script accepts an optional output directory for your convenience. For example,
-
-```
-./install.sh ~/Downloads
-```
-
-Create a new Github Release with a new tag and upload the newly created executable.
-
 # Features
 
 ## Cloud Sync
@@ -93,3 +52,30 @@ For more convenience, you can export a `FOB_DB_PATH` variable in your shell.
 For example, add the following line to `~/.bashrc` (for bash shell):
 ```
 export FOB_DB_PATH="~/Dropbox/my-fob.db"
+```
+
+# Development
+
+Run app in debug mode:
+```
+uv run fob --debug
+```
+
+Use database at custom path:
+```
+uv run fob --database ~/Downloads/testing_fob.db
+```
+
+The so-called database is actually just a human-readable JSON file. To see its location:
+```
+uv run fob info
+```
+
+# Testing
+
+```
+uvx pytest
+```
+
+This is an end-to-end test. It installs `fob` to a temporary directory using `install.sh` and runs commands against it. Github Actions is set up to run the same test upon pushing to main branch.
+
