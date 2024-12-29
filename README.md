@@ -9,7 +9,9 @@
 
 **Focus Blocks** is my take on time management inspired by Flow State, Pomodoro Technique, Timeboxing, and Deep Work. Please read the [Introduction to Focus Blocks](/FOCUS_BLOCKS.md) first to understand the motivation for the creation of this program.
 
-**`fob`** is a command-line program that makes it easy to implement Focus Blocks in your daily life. It is written in Python and distributed as standalone binaries for Mac, Linux, and Windows.
+**`fob`** is a simple CLI program that lets you plan, visualize, and update your monthly goals within the Focus Blocks time management framework.
+
+It is written in Python and can be installed on Mac, Linux, and Windows.
 
 # Quick Start
 
