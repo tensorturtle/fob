@@ -45,25 +45,31 @@ fob help
 
 # A Day in the Life
 
-At the beginning of the month,
+#### It's the beginning of a new month - let's set our goals.
 
 ![](/assets/fob-v0.2.6-new_month.png)
 
-It's a new day! Say good morning (gm)!
+#### It's a new day! Say good morning!
 
 ![](/assets/fob-v0.2.6-gm.png)
 
-Check off the first block of the day:
+#### Check off the first block of the day:
 
 ![](/assets/fob-v0.2.6-did-1.png)
 
-Oops, we couldn't do block 3. Let's change that block to 'Buffer', which is exactly for unforeseen things like this.
+#### Let's remind ourselves what the day ahead looks like:
+
+![](/assets/fob-v0.2.6-sup.png)
+
+#### Oops, we couldn't do block 3. Let's change that block to 'Buffer', which is exactly for unforeseen things like this.
 
 ![](/assets/fob-v0.2.6-didnt-3.png)
 
-Yay, we're done for the day! Great job.
+#### Checking off the final block for the day. Great job.
 
 ![](/assets/fob-v0.2.6-did-4.png)
+
+#### Come back tomorrow and say good morning to repeat.
 
 # Features
 
