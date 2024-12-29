@@ -11,7 +11,7 @@
 
 **`fob`** is a simple CLI program that lets you plan, visualize, and update your monthly goals within the Focus Blocks time management framework.
 
-It is written in Python and can be installed on Mac, Linux, and Windows.
+It is written in Python with minimal dependencies and can be installed on Mac, Linux, and Windows.
 
 # Quick Start
 
