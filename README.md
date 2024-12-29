@@ -11,20 +11,30 @@
 
 # Quick Start
 
-Download the Mac or Linux compatible binaries from the latest [Github release](https://github.com/tensorturtle/fob/releases) > Assets.
+First, install `uv` (directions [here](https://docs.astral.sh/uv/getting-started/installation/))
 
-Make it executable (replace the fob... with the file name)
-```
-sudo chmod +x fob...
-```
-
-Move it to somewhere on PATH, typically `~/.local/bin`. Rename it to `fob` also.
+Then, clone this repository to the directory of your choice.
 
 ```
-mv ~/Downloads/fob... ~/.local/bin/fob
+git clone https://github.com/tensorturtle/fob.git
 ```
 
-On Mac, you may need to go to "System Settings" -> "Privacy & Security" to allow `fob` to run. By default, Mac shows scary warnings and doesn't let you run just any program. If you can't get it to work, follow the next steps to install it from source.
+You can try out `fob` without installing it by using `uv run`:
+```
+uv run fob help
+```
+
+If you want to be able to call `fob` directly from your terminal, install it to your system:
+
+```
+./install.sh
+```
+
+This will compile and install `fob`. Now you can run:
+
+```
+fob help
+```
 
 # Development
 
