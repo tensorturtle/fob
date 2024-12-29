@@ -43,6 +43,28 @@ This will compile and install `fob`. Now you can run:
 fob help
 ```
 
+# A Day in the Life
+
+At the beginning of the month,
+
+![](/assets/fob-v0.2.6-new_month.png)
+
+It's a new day! Say good morning (gm)!
+
+![](/assets/fob-v0.2.6-gm.png)
+
+Check off the first block of the day:
+
+![](/assets/fob-v0.2.6-did-1.png)
+
+Oops, we couldn't do block 3. Let's change that block to 'Buffer', which is exactly for unforeseen things like this.
+
+![](/assets/fob-v0.2.6-didnt-3.png)
+
+Yay, we're done for the day! Great job.
+
+![](/assets/fob-v0.2.6-did-4.png)
+
 # Features
 
 ## Cloud Sync
