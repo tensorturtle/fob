@@ -6,7 +6,7 @@
 
 **A CLI program for implementing Focus Blocks in your daily life.**
 
-![](/assets/fob-v0.2.6-sup-screenshot.png)
+![](/assets/fob-v0.2.6-sup.png)
 
 # Intro
 
