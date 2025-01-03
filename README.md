@@ -80,13 +80,14 @@ Bring your own cloud.
 `fob` runs on a single database file. You can store this database on Dropbox or your own cloud. Just pass the path to the `--database` option when running `fob`. For example:
 
 ```
-fob --database ~/Dropbox/my-fob.db help
+fob --database /home/tensorturtle/Dropbox/my-fob.db help
 ```
 
 For more convenience, you can export a `FOB_DB_PATH` variable in your shell.
 For example, add the following line to `~/.bashrc` (for bash shell):
 ```
-export FOB_DB_PATH="~/Dropbox/my-fob.db"
+export FOB_DB_PATH="/home/tensorturtle/Dropbox/my-fob.db"
+source ~/.bashrc
 ```
 
 # Development
