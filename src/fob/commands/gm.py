@@ -102,6 +102,10 @@ def new_day(args: Namespace, db: TinyDBWrapper, data) -> None:
 
         blocks_remaining_to_assign -= blocks_assigned
 
+        # end this command if we've assigned all blocks for today
+        if blocks_remaining_to_assign == 0:
+            break
+
         new_not_completed_areas[area_name] = {
             'allocated': blocks['allocated'],
             'completed': blocks['completed'] + int(blocks_assigned)

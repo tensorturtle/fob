@@ -7,7 +7,7 @@ import sys
 from rich import print
 
 def get_version_number() -> tuple[int, int, int]:
-    return (0,2,10)
+    return (0,2,11)
 
 def get_db_path(args: Namespace) -> Path:
     '''
