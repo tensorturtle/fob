@@ -20,7 +20,12 @@ It is written in Python with minimal dependencies and can be installed on Mac, L
 
 First, install `uv` (directions [here](https://docs.astral.sh/uv/getting-started/installation/))
 
-Download and install Focus Blocks:
+Install the required version of python:
+```
+uv install python 3.12
+```
+
+Install Focus Blocks:
 ```
 uv tool install focus-blocks
 ```
