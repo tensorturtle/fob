@@ -1,7 +1,7 @@
 [project]
 name = "focus-blocks"
 # Remember to update the version number in 'utils/utils.py' manually also.
-version = "0.2.9"
+version = "0.2.10"
 description = "Focus Blocks: Simple and elegant daily time management tool."
 readme = "README.md"
 authors = [{ name = "tensorturtle", email = "tensorturtle@gmail.com" }]

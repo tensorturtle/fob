@@ -146,7 +146,7 @@ def converse_with_user(args: Namespace) ->MonthBlockData:
         equal_split_from_remaining = remaining_blocks // (len(areas) - i - 1)
         blocks_for_area = int(
             Prompt.ask(
-                f"How many blocks for {area}?",
+                f"How many blocks for {area}? (remaining: {remaining_blocks})",
                 default=str(equal_split_from_remaining),
             )
         )
