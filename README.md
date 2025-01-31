@@ -20,25 +20,12 @@ It is written in Python with minimal dependencies and can be installed on Mac, L
 
 First, install `uv` (directions [here](https://docs.astral.sh/uv/getting-started/installation/))
 
-Then, clone this repository to the directory of your choice.
-
+Download and install `fob` to your system:
 ```
-git clone https://github.com/tensorturtle/fob.git
-```
-
-You can try out `fob` without installing it by using `uv run`:
-```
-uv run fob help
+uv tool install focus-blocks
 ```
 
-If you want to be able to call `fob` directly from your terminal, install it to your system:
-
-```
-./install.sh
-```
-
-This will compile and install `fob`. Now you can run:
-
+Now, `fob` is available from anywhere on the system. Try:
 ```
 fob help
 ```
@@ -71,7 +58,7 @@ fob help
 
 #### Come back tomorrow and say good morning to repeat.
 
-# Features
+# Additional Features
 
 ## Cloud Sync
 
@@ -92,6 +79,19 @@ source ~/.bashrc
 
 # Development
 
+Install uv.
+
+Clone this repository:
+
+```
+git clone https://github.com/tensorturtle/fob.git
+```
+
+Run `fob` without installing it by using `uv run`:
+```
+uv run fob help
+```
+
 Run app in debug mode:
 ```
 uv run fob --debug
@@ -107,11 +107,35 @@ The so-called database is actually just a human-readable JSON file. To see its l
 uv run fob info
 ```
 
-# Testing
+## Testing
 
 ```
 uvx pytest
 ```
 
 This is an end-to-end test. It installs `fob` to a temporary directory using `install.sh` and runs commands against it. Github Actions is set up to run the same test upon pushing to main branch.
+
+
+## Distribution 
+
+Update version number in `pyproject.toml` and `utils/utils.py`
+
+Build and publish package to PyPI:
+```
+rm -r dist/
+uv build
+uv publish --token $TOKEN
+```
+
+Wait a moment for PyPI database to be updated (maybe a minute) and run:
+```
+uvx --from focus-blocks@latest fob
+```
+
+## Database Versioning
+
+This package uses [SemVer](https://semver.org/), with an additional convention:
+
+Releases with the same major-minor (0.0.X) version share the same database schema.
+If a new major-minor version is released, a new database is created and no migrations occur. The old database is not deleted.
 

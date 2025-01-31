@@ -20,9 +20,9 @@ wheels = [
 ]
 
 [[package]]
-name = "fob"
-version = "0.2.6"
-source = { virtual = "." }
+name = "focus-blocks"
+version = "0.2.8"
+source = { editable = "." }
 dependencies = [
     { name = "pyinstaller" },
     { name = "pytest" },
