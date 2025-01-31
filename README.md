@@ -30,6 +30,19 @@ Now, `fob` is available from anywhere on the system. Try:
 fob help
 ```
 
+## Upgrade
+
+Upgrading focus-blocks doesn't affect the database, so this is safe.
+```
+uv tool upgrade focus-blocks
+```
+
+## Uninstall
+
+```
+uv tool uninstall focus-blocks
+```
+
 # A Day in the Life
 
 #### It's the beginning of a new month - let's set our goals.
