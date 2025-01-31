@@ -26,7 +26,7 @@ uv tool install focus-blocks
 ```
 
 > [!WARNING]  
-> Common mistake: The package name is focus-blocks, not fob. Don't do this: `uv tool install fob`
+> Common mistake: The package name is focus-blocks, not fob. Do not do this: `uv tool install fob`
 
 Now, `fob` is available from anywhere on the system. Try:
 ```
