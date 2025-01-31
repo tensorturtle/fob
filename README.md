@@ -20,7 +20,7 @@ It is written in Python with minimal dependencies and can be installed on Mac, L
 
 First, install `uv` (directions [here](https://docs.astral.sh/uv/getting-started/installation/))
 
-Download and install `fob` to your system:
+Download and install Focus Blocks:
 ```
 uv tool install focus-blocks
 ```
@@ -28,7 +28,7 @@ uv tool install focus-blocks
 > [!WARNING]  
 > Common mistake: The package name is focus-blocks, not fob. Do not do this: `uv tool install fob`
 
-Now, `fob` is available from anywhere on the system. Try:
+Now, the `fob` program is available from anywhere on the system. Try:
 ```
 fob help
 ```
