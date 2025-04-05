@@ -22,7 +22,7 @@ First, install `uv` (directions [here](https://docs.astral.sh/uv/getting-started
 
 Install the required version of python:
 ```
-uv install python 3.12
+uv python install 3.12
 ```
 
 Install Focus Blocks:
